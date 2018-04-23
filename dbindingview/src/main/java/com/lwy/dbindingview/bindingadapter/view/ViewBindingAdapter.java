@@ -8,18 +8,15 @@ import com.lwy.dbindingview.command.ReplyCommand;
 import com.lwy.dbindingview.command.ResponseCommand;
 
 
-/**
- * Created by kelin on 16-3-24.
- */
 public final class ViewBindingAdapter {
 
     @BindingAdapter({"clickCommand"})
-    public static void clickCommand(View view, final ReplyCommand<View> clickCommand) {
+    public static void clickCommand(View view, final ReplyCommand clickCommand) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (clickCommand != null) {
-                    clickCommand.execute(v);
+                    clickCommand.execute();
                 }
             }
         });

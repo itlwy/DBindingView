@@ -99,7 +99,7 @@ public class BindingRecyclerViewAdapters {
             int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
             if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                 if (this.RcVFooterVM.getOnLoadMoreCommand() != null && !this.RcVFooterVM.getIsFooterLoading().get()) {
-                    this.RcVFooterVM.getIsFooterLoading().set(true);
+                    this.RcVFooterVM.switchLoading(true);
                     this.RcVFooterVM.getOnLoadMoreCommand().execute(recyclerView.getAdapter().getItemCount());
                 }
             }
