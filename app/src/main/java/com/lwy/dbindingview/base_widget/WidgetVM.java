@@ -69,7 +69,7 @@ public class WidgetVM {
             Iterator<String> iter = streetJson.keys();
             while (iter.hasNext()) {
                 String key = iter.next();
-                KeyValue keyValue = new KeyValue(areaList.size(), key);
+                KeyValue keyValue = new KeyValue(areaList.size()+1, key);
                 areaList.add(keyValue);
             }
             initObserver();
@@ -99,7 +99,7 @@ public class WidgetVM {
         if (streetArray != null) {
             List<KeyValue> tempArrayList = new ArrayList<>();
             for (int i = 0; i < streetArray.length(); i++) {
-                KeyValue keyValue = new KeyValue(streetList.size(), streetArray.getString(i));
+                KeyValue keyValue = new KeyValue(selectedArea.get().key * 100 + streetList.size(), streetArray.getString(i));
                 tempArrayList.add(keyValue);
             }
             streetList.addAll(tempArrayList);

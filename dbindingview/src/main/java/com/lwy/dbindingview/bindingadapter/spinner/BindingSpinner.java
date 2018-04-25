@@ -63,7 +63,6 @@ public class BindingSpinner extends AppCompatSpinner {
     }
 
 
-
     @BindingAdapter(value = {"selectedValue", "spinneritems"})
     public static void selectedValue(BindingSpinner spinner, KeyValue selectedValue, List<KeyValue> items) {
         if (spinner.getAdapter() == null) {
@@ -84,7 +83,10 @@ public class BindingSpinner extends AppCompatSpinner {
 
     }
 
-    private static void setSelection(BindingSpinner spinner, KeyValue selectedValue) {
+    private static boolean setSelection(BindingSpinner spinner, KeyValue selectedValue) {
+        if (selectedValue == null)
+            return false;
+        boolean flag = false;
         if (selectedValue.key > -1) {
             // 有key 就用key来判断
             BindingArrayAdapter bindingArrayAdapter = (BindingArrayAdapter) spinner.getAdapter();
@@ -93,6 +95,7 @@ public class BindingSpinner extends AppCompatSpinner {
                 if (item.key == selectedValue.key) {
                     spinner.setSelection(i);
                     spinner.selectedValue = selectedValue;
+                    flag = true;
                     break;
                 }
             }
@@ -102,10 +105,12 @@ public class BindingSpinner extends AppCompatSpinner {
                 if (temp.equals(selectedValue.value)) {
                     spinner.setSelection(i);
                     spinner.selectedValue = selectedValue;
+                    flag = true;
                     break;
                 }
             }
         }
+        return flag;
     }
 
     private static void initAdapter(BindingSpinner spinner, List<KeyValue> items, KeyValue selectedValue) {
@@ -114,14 +119,20 @@ public class BindingSpinner extends AppCompatSpinner {
                     items);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
+            setSelection(spinner, selectedValue);
         } else {
             BindingArrayAdapter arrayAdapter = (BindingArrayAdapter) spinner.getAdapter();
             arrayAdapter.clear();
             arrayAdapter.addAll(items);
+//                spinner.setSelection(0);
+//            arrayAdapter.notifyDataSetChanged();
+            selectedValue = arrayAdapter.getObjects().get(0);
+            spinner.selectedValue = selectedValue;
+            if (spinner.listener != null) {
+                spinner.listener.onChange();
+            }
         }
-        if (selectedValue != null) {
-            setSelection(spinner, selectedValue);
-        }
+        setSelection(spinner, selectedValue);
 
     }
 
