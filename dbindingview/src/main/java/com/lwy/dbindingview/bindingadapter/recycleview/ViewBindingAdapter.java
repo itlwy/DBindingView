@@ -12,7 +12,7 @@ import com.lwy.dbindingview.data.RcVFooterVM;
 
 import java.util.List;
 
-public class BindingRecyclerViewAdapters {
+public class ViewBindingAdapter {
     // RecyclerView
     @SuppressWarnings("unchecked")
     @BindingAdapter(value = {"itemBinding", "items", "adapter", "itemIds", "viewHolder", "onItemClick"}, requireAll = false)

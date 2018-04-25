@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+        <variable
+            name="viewmodel"
+            type="com.lwy.dbindingview.recycleview.vm.RcvVM"/>
+
+        <variable
+            name="listeners"
+            type="com.lwy.dbindingview.recycleview.Listeners"/>
+
+        <import type="com.lwy.dbindingview.LayoutManagers"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:refreshing="@{viewmodel.viewStyle.isRefreshing}"
+            app:onRefreshCommand="@{viewmodel.onRefreshCommand}">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:adapter="@{viewmodel.adapter}"
+                app:footerVM="@{viewmodel.footerVM}"
+                app:itemBinding="@{viewmodel.multipleItems}"
+                app:items="@{viewmodel.headerFooterItems}"
+                app:layoutManager="@{LayoutManagers.linear()}"
+                app:viewHolder="@{viewmodel.viewHolder}"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <LinearLayout
+            style="?buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/add"
+                style="?buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClickListener="@{() -> listeners.onAddItem()}"
+                android:text="Add Item"/>
+
+            <Button
+                android:id="@+id/remove"
+                style="?buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClickListener="@{() -> listeners.onRemoveItem()}"
+                android:text="Remove Item"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

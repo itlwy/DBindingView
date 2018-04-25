@@ -3,9 +3,6 @@ package com.lwy.dbindingview.command;
 import com.lwy.dbindingview.command.functions.Func0;
 import com.lwy.dbindingview.command.functions.Func1;
 
-/**
- * Created by kelin on 15-8-4.
- */
 public class ResponseCommand<T, R> {
 
     private Func0<R> execute0;

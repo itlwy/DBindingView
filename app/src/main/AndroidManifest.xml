@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.lwy.dbindingview">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -18,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".recycleview.RecycleViewActivity1">
+        </activity>
+        <activity android:name=".base_widget.WidgeActivity">
         </activity>
     </application>
 

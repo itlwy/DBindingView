@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="footerViewModel"
-            type="com.lwy.dbindingview.recycleview.vm.FooterViewModel"/>
+            name="footerVM"
+            type="com.lwy.dbindingview.recycleview.vm.FooterVM"/>
     </data>
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="8dp"
-            app:display="@{footerViewModel.state==0?true:false}">
+            app:display="@{footerVM.state==0?true:false}">
 
             <ProgressBar
                 android:layout_width="32dp"
@@ -42,14 +42,14 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="8dp"
-            app:display="@{footerViewModel.state==1?true:false}">
+            app:display="@{footerVM.state==1?true:false}">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
-                android:text="@{footerViewModel.noMoreTip}"
+                android:text="@{footerVM.noMoreTip}"
                 android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>

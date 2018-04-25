@@ -1,8 +1,5 @@
 package com.lwy.dbindingview.bindingadapter.viewgroup;
 
-/**
- * Created by kelin on 16-3-24.
- */
 public final class ViewBindingAdapter {
 
 //    @BindingAdapter({"itemView", "viewModels"})

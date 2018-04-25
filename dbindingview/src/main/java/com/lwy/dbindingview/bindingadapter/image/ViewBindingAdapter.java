@@ -23,10 +23,12 @@ public final class ViewBindingAdapter {
                                  @DrawableRes int placeholderImageRes,
                                  int width, int height) {
         Glide.with(imageView.getContext())
-                .load(uri)
-                .placeholder(placeholderImageRes)
-                .override(width, height)
-                .into(imageView);
+                .load(uri).into(imageView);
+//                .placeholder(placeholderImageRes);
+//        if (width > 0 && height > 0) {
+//            builder.override(width, height);
+//        }
+//        builder.into(imageView);
     }
 
 }

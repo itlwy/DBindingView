@@ -30,8 +30,17 @@ import java.util.Map;
 })
 public class BindingCheckGroup extends LinearLayout {
 
+    private String separator;
     private String selectedValues;
     private InverseBindingListener listener;
+
+    public String getSeparator() {
+        return separator;
+    }
+
+    public void setSeparator(String separator) {
+        this.separator = separator;
+    }
 
     public void setListener(InverseBindingListener listener) {
         this.listener = listener;
@@ -61,11 +70,12 @@ public class BindingCheckGroup extends LinearLayout {
 
     }
 
-    @BindingAdapter("selectedValues")
-    public static void setSelectedValues(BindingCheckGroup view, String selectedValues) {
+    @BindingAdapter(value = {"selectedValues", "separator"}, requireAll = false)
+    public static void setSelectedValues(BindingCheckGroup view, String selectedValues, String separator) {
+        view.setSeparator(TextUtils.isEmpty(separator) ? "," : separator);
         if (selectedValues != null && !selectedValues.equals(view.selectedValues)) {
-            List<String> selectedList = splitAsList(selectedValues,",");
-            List<String> viewSelectedList = splitAsList(view.selectedValues,",");
+            List<String> selectedList = splitAsList(selectedValues, view.getSeparator());
+            List<String> viewSelectedList = splitAsList(view.selectedValues, view.getSeparator());
 
             List<String> differentList = getdifferentList(viewSelectedList, selectedList);
             if (differentList.size() > 0) {
@@ -99,7 +109,7 @@ public class BindingCheckGroup extends LinearLayout {
     }
 
     public void notifyValuesChange(int checkBoxID, String checkBoxLabel, boolean ischeck) {
-        List<String> selectedList = splitAsList(this.selectedValues, ",");
+        List<String> selectedList = splitAsList(this.selectedValues, separator);
         if (ischeck) {
             // TODO: 2017/11/6 换成不允许重复的集合
             if (!selectedList.contains(checkBoxLabel))
@@ -108,7 +118,7 @@ public class BindingCheckGroup extends LinearLayout {
             selectedList.remove(checkBoxLabel);
         }
 
-        this.selectedValues = joinFromList(selectedList, ",");
+        this.selectedValues = joinFromList(selectedList, separator);
         if (this.listener != null) {
             this.listener.onChange();
         }

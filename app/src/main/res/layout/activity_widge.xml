@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.lwy.dbindingview.base_widget.WidgeActivity">
+
+    <data>
+
+        <import type="com.lwy.dbindingview.R"/>
+
+        <variable
+            name="viewmodel"
+            type="com.lwy.dbindingview.base_widget.WidgetVM"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/llt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="@dimen/padding_medium"
+            android:text="@{String.format(`地址:%s\r\n辖区:%s\r\n街道:%s\r\n性别:%s\r\n爱好:%s`,viewmodel.address.get(),viewmodel.selectedArea.get().value,viewmodel.selectedStreet.get().value,viewmodel.sex.value,viewmodel.hobby.get())}"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title"
+            tools:text="地址:%s,辖区:%s,街道:%s"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_small">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_weight="4"
+                        android:padding="@dimen/padding_small"
+                        android:text="地址:"
+                        android:textSize="@dimen/text_item"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_marginRight="@dimen/margin_medium"
+                        android:layout_weight="10"
+                        android:background="@drawable/shape_round_edit"
+                        android:padding="@dimen/padding_small"
+                        android:text="@={viewmodel.address}"
+                        android:textSize="@dimen/text_item"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/margin_split_line"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_small">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_weight="4"
+                        android:padding="@dimen/padding_small"
+                        android:text="辖区:"
+                        android:textSize="@dimen/text_item"/>
+
+                    <com.lwy.dbindingview.bindingadapter.spinner.BindingSpinner
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_marginRight="@dimen/margin_medium"
+                        android:layout_weight="10"
+                        android:background="@mipmap/bgspinner"
+                        app:selectedValue="@={viewmodel.selectedArea}"
+                        app:spinneritems="@{viewmodel.areaList}"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_split_line"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_small">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_weight="4"
+                        android:padding="@dimen/padding_small"
+                        android:text="街道:"
+                        android:textSize="@dimen/text_item"/>
+
+                    <com.lwy.dbindingview.bindingadapter.spinner.BindingSpinner
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_marginRight="@dimen/margin_medium"
+                        android:layout_weight="10"
+                        android:background="@mipmap/bgspinner"
+                        app:selectedValue="@={viewmodel.selectedStreet}"
+                        app:spinneritems="@{viewmodel.streetList}"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_split_line"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_small">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_weight="4"
+                        android:padding="@dimen/padding_small"
+                        android:text="性别:"
+                        android:textSize="@dimen/text_item"/>
+
+                    <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_marginRight="@dimen/margin_medium"
+                        android:layout_weight="10"
+                        android:orientation="horizontal"
+                        app:checkedValue="@={viewmodel.sex}">
+
+                        <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/margin_medium"
+                            android:text="男"
+                            app:value="@{1}"/>
+
+                        <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_medium"
+                            android:text="女"
+                            app:value="@{0}"
+                            />
+                    </com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_split_line"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_small">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_weight="4"
+                        android:padding="@dimen/padding_small"
+                        android:text="爱好:"
+                        android:textSize="@dimen/text_item"/>
+
+                    <com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckGroup
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_marginRight="@dimen/margin_medium"
+                        android:layout_weight="10"
+                        app:selectedValues="@={viewmodel.hobby}"
+                        app:separator="@{viewmodel.cbSeparator}">
+
+                        <com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="看代码"/>
+
+                        <com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="敲代码"/>
+
+                        <com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="还是代码"/>
+                    </com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_split_line"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_small">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_weight="4"
+                        android:padding="@dimen/padding_small"
+                        android:text="图片:"
+                        android:textSize="@dimen/text_item"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:placeholderImageRes="@{R.mipmap.ic_launcher}"
+                        app:uri="@{viewmodel.imageUri}"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            clickCommand="@{viewmodel.checkCommand}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="查看"/>
+    </LinearLayout>
+</layout>
+

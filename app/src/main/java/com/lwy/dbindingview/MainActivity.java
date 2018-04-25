@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements IView {
         mViewModel = new MainVM(this);
         mDatabinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mDatabinding.setViewmodel(mViewModel);
+
 //        mBinding.executePendingBindings();
     }
 

@@ -10,9 +10,6 @@ import android.widget.EditText;
 import com.lwy.dbindingview.command.ReplyCommand;
 
 
-/**
- * Created by kelin on 16-3-24.
- */
 public final class ViewBindingAdapter {
 
 
