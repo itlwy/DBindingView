@@ -158,15 +158,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/margin_medium"
-                            android:text="男"
-                            app:value="@{1}"/>
+                            app:value="@{viewmodel.sex_male}"/>
 
                         <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_medium"
-                            android:text="女"
-                            app:value="@{0}"
+                            app:value="@{viewmodel.sex_female}"
                             />
                     </com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup>
                 </LinearLayout>
@@ -242,11 +240,11 @@
         </ScrollView>
 
         <Button
-            clickCommand="@{viewmodel.checkCommand}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="查看"/>
+            android:text="查看"
+            app:clickCommand="@{viewmodel.checkCommand}"/>
     </LinearLayout>
 </layout>
 

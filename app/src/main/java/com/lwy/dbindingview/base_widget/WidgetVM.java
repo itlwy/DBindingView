@@ -40,6 +40,8 @@ public class WidgetVM {
     public JSONObject streetJson;
 
     public final ObservableField<KeyValue> sex = new ObservableField<>();
+    public final KeyValue sex_male = new KeyValue(1,"男");
+    public final KeyValue sex_female = new KeyValue(0,"女");
 
     public String cbSeparator = "@";
 

@@ -17,7 +17,7 @@ import static com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGro
  */
 
 public class DataBindingRadioButton extends AppCompatRadioButton {
-    private Integer value;
+    private KeyValue value;
 
     public DataBindingRadioButton(Context context) {
         super(context);
@@ -31,11 +31,11 @@ public class DataBindingRadioButton extends AppCompatRadioButton {
         super(context, attrs, defStyleAttr);
     }
 
-    public Integer getValue() {
+    public KeyValue getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(KeyValue value) {
         this.value = value;
     }
 
@@ -53,13 +53,14 @@ public class DataBindingRadioButton extends AppCompatRadioButton {
     }
 
     @BindingAdapter(value = {"value"})
-    public static void setValue(DataBindingRadioButton radioButton, Integer value) {
+    public static void setValue(DataBindingRadioButton radioButton, KeyValue value) {
+        radioButton.setText(value.value);
         radioButton.setValue(value);
         ViewParent parent = radioButton.getParent();
         if (parent instanceof DataBindingRadioGroup) {
             KeyValue checkedValue = ((DataBindingRadioGroup) parent).getCheckedValue();
             if (checkedValue != null) {
-                radioButton.setChecked(isSame(checkedValue.key, value));
+                radioButton.setChecked(isSame(checkedValue.key, value.key));
             } else
                 radioButton.setChecked(false);
         }

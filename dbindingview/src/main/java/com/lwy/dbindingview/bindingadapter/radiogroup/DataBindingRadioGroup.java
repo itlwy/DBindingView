@@ -47,7 +47,7 @@ public class DataBindingRadioGroup extends RadioGroup {
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int checkedId) {
                 if (checkedId > 0) {
                     DataBindingRadioButton radioButton = (DataBindingRadioButton) findViewById(checkedId);
-                    KeyValue keyValue = new KeyValue(radioButton.getValue(), radioButton.getText().toString());
+                    KeyValue keyValue = new KeyValue(radioButton.getValue().key, radioButton.getValue().value);
                     setCheckedValue(radioButton.isChecked() ? keyValue : null);
                 } else {
                     setCheckedValue(null);
@@ -76,14 +76,14 @@ public class DataBindingRadioGroup extends RadioGroup {
         if (this.checkedValue == null) {
             clearCheck();
         } else {
-            DataBindingRadioButton customRadioButton = (DataBindingRadioButton) findViewById(getCheckedRadioButtonId());
+            DataBindingRadioButton customRadioButton = findViewById(getCheckedRadioButtonId());
             Integer key = this.checkedValue.key;
-            if (customRadioButton == null || !isSame(key, customRadioButton.getValue())) {
+            if (customRadioButton == null || !isSame(key, customRadioButton.getValue().key)) {
 
                 for (int i = 0; i < getChildCount(); i++) {
                     View child = getChildAt(i);
                     if (child instanceof DataBindingRadioButton) {
-                        Integer value = ((DataBindingRadioButton) child).getValue();
+                        Integer value = ((DataBindingRadioButton) child).getValue().key;
                         if (isSame(this.checkedValue.key, value)) {
                             ((DataBindingRadioButton) child).setChecked(true);
                         }
