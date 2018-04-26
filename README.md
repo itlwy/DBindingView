@@ -30,7 +30,7 @@
 </div>
 
 
-# 一个对databinding的常用封装库,包含基础控件及recycleview等
+#一个对databinding的常用封装库,包含基础控件及recycleview等
 
 
 # Screenshots<a id="sec-1" name="sec-1"></a>
@@ -385,27 +385,27 @@ Add the dependency
 1.  单个布局的简单列表代码片段
 
     1、定义viewmodel
-    
+
         public class ItemVM extends BaseObservable {
             public final boolean checkable; // for now,it's useless
             @Bindable
             private int index;
             @Bindable
             private boolean checked;
-        
+
             public ItemVM(int index, boolean checkable) {
                 this.index = index;
                 this.checkable = checkable;
             }
-        
+
             public int getIndex() {
                 return index;
             }
-        
+
             public boolean isChecked() {
                 return checked;
             }
-        
+
             public boolean onToggleChecked(View v) {
                 if (!checkable) {
                     return false;
@@ -415,21 +415,21 @@ Add the dependency
                 return true;
             }
         }
-    
-    2、定义Item布局文件
-    
+
+    2、定义Item布局文件R.layout.item
+
         <layout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools">
-        
+
             <data>
-        
+
                 <variable
                     name="item"
                     type="com.lwy.dbindingview.recycleview.vm.ItemVM" />
-        
+
                 <import type="android.view.View" />
             </data>
-        
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -437,7 +437,7 @@ Add the dependency
                 android:onLongClickListener="@{item::onToggleChecked}"
                 android:longClickable="@{item.checkable}"
                 android:orientation="horizontal">
-        
+
                 <TextView
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="0dp"
@@ -446,7 +446,7 @@ Add the dependency
                     android:padding="16dp"
                     android:text='@{"Item " + (item.index + 1)}'
                     tools:text="Item 1" />
-        
+
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -454,17 +454,17 @@ Add the dependency
                     android:visibility="@{item.checked ? View.VISIBLE : View.GONE}" />
             </LinearLayout>
         </layout>
-    
+
     3、创建layout和viewmodel变量的绑定关系包装类
-    
+
         public final ItemBinding<ItemVM> singleItem = ItemBinding.of(com.lwy.dbindingview.BR.item, R.layout.item);
-    
+
     4、创建数据源
-    
+
         public final ObservableList<ItemVM> items = new ObservableArrayList<>();
-    
+
     5、设置RecycleView的属性
-    
+
         ...
          <android.support.v7.widget.RecyclerView
                        android:id="@+id/list"
@@ -478,13 +478,13 @@ Add the dependency
 2.  复杂布局代码片段
 
     1、定义viewmodel(同上)
-    
+
     2、定义Item布局文件R.layout.item(同上)
-    
+
     3、创建footer的viewmodel
-    
+
         public class FooterVM extends RcVFooterVM {
-        
+
             private ReplyCommand<Integer> callback;
             public final ObservableField<String> noMoreTip = new ObservableField<>();
             /*
@@ -492,15 +492,15 @@ Add the dependency
                 state : 1 idle
              */
             public final ObservableField<Integer> state = new ObservableField<>();
-        
-        
+
+
             public FooterVM(ReplyCommand<Integer> callback) {
                 super();
                 this.callback = callback;
                 state.set(1);
                 noMoreTip.set("暂无更多");
             }
-        
+
             @Override
             protected ReplyCommand<Integer> geneOnLoadMoreCommand() {
                 return new ReplyCommand<>(new Action1<Integer>() {
@@ -511,7 +511,7 @@ Add the dependency
                     }
                 });
             }
-        
+
             @Override
             public void switchLoading(boolean flag) {
                 if (flag) {
@@ -522,33 +522,62 @@ Add the dependency
                 super.switchLoading(flag);
             }
         }
-    
-    4、创建footer的布局文件R.layout.item\_header\_footer
-    
-        <?xml version="1.0" encoding="utf-8"?>
+
+    4、创建footer的布局文件R.layout.default\_loading
+
         <layout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools">
-        
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools">
+
             <data>
-        
+
                 <variable
-                    name="item"
-                    type="String" />
+                    name="footerVM"
+                    type="com.lwy.dbindingview.recycleview.vm.FooterVM"/>
             </data>
-        
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-        
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Body1"
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#dcdcdc"
-                    android:padding="16dp"
-                    android:text="@{item}"
-                    tools:text="Header" />
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:display="@{footerVM.state==0?true:false}">
+
+                    <ProgressBar
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="正在加载..."
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:display="@{footerVM.state==1?true:false}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:text="@{footerVM.noMoreTip}"
+                        android:textSize="14sp"/>
+                </LinearLayout>
             </LinearLayout>
         </layout>
     
