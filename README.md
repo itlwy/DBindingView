@@ -1,26 +1,27 @@
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2>目录</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Screenshots</a></li>
-<li><a href="#sec-2">2. How to import</a>
+<li><a href="#sec-1">1. 写在前面</a></li>
+<li><a href="#sec-2">2. 缩略图</a></li>
+<li><a href="#sec-3">3. 如何引入</a>
 <ul>
-<li><a href="#sec-2-1">2.1. step1</a></li>
-<li><a href="#sec-2-2">2.2. step2</a></li>
+<li><a href="#sec-3-1">3.1. step1</a></li>
+<li><a href="#sec-3-2">3.2. step2</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3. How to use</a>
+<li><a href="#sec-4">4. 如何使用</a>
 <ul>
-<li><a href="#sec-3-1">3.1. 一般控件</a>
+<li><a href="#sec-4-1">4.1. 一般控件</a>
 <ul>
-<li><a href="#sec-3-1-1">3.1.1. 涉及到的类</a></li>
-<li><a href="#sec-3-1-2">3.1.2. 如上面的动态图,目前展示了基本控件的进行一些初始化的封装,目的是将一些繁琐的初始化操作自动化掉</a></li>
+<li><a href="#sec-4-1-1">4.1.1. 涉及到的类</a></li>
+<li><a href="#sec-4-1-2">4.1.2. 如上面的动态图,目前展示了基本控件的进行一些初始化的封装,目的是将一些繁琐的初始化操作自动化掉</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-2">3.2. RecycleView</a>
+<li><a href="#sec-4-2">4.2. RecycleView</a>
 <ul>
-<li><a href="#sec-3-2-1">3.2.1. 属性</a></li>
-<li><a href="#sec-3-2-2">3.2.2. 代码说明</a></li>
+<li><a href="#sec-4-2-1">4.2.1. 属性</a></li>
+<li><a href="#sec-4-2-2">4.2.2. 代码说明</a></li>
 </ul>
 </li>
 </ul>
@@ -30,16 +31,18 @@
 </div>
 
 
-#一个对databinding的常用封装库,包含基础控件及recycleview等
+# 写在前面<a id="sec-1" name="sec-1"></a>
 
+一个对databinding的常用封装库,包含基础控件及recycleview等。不了解databinding的可以先阅读相关网上的资料,这里推荐[
+Android DataBinding介绍](https://blog.csdn.net/tianjf0514/article/details/75195108)
 
-# Screenshots<a id="sec-1" name="sec-1"></a>
+# 缩略图<a id="sec-2" name="sec-2"></a>
 
 ![normalWidget](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview.gif) ![recycleview](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview1.gif)
 
-# How to import<a id="sec-2" name="sec-2"></a>
+# 如何引入<a id="sec-3" name="sec-3"></a>
 
-## step1<a id="sec-2-1" name="sec-2-1"></a>
+## step1<a id="sec-3-1" name="sec-3-1"></a>
 
 Add the JitPack repository to your build file
 
@@ -50,7 +53,7 @@ Add the JitPack repository to your build file
                             }
                     }
 
-## step2<a id="sec-2-2" name="sec-2-2"></a>
+## step2<a id="sec-3-2" name="sec-3-2"></a>
 
 Add the dependency
 
@@ -58,11 +61,11 @@ Add the dependency
                     compile 'com.github.itlwy:DBindingView:v1.0.1'
             }
 
-# How to use<a id="sec-3" name="sec-3"></a>
+# 如何使用<a id="sec-4" name="sec-4"></a>
 
-## 一般控件<a id="sec-3-1" name="sec-3-1"></a>
+## 一般控件<a id="sec-4-1" name="sec-4-1"></a>
 
-### 涉及到的类<a id="sec-3-1-1" name="sec-3-1-1"></a>
+### 涉及到的类<a id="sec-4-1-1" name="sec-4-1-1"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -141,7 +144,7 @@ Add the dependency
 </tbody>
 </table>
 
-### 如上面的动态图,目前展示了基本控件的进行一些初始化的封装,目的是将一些繁琐的初始化操作自动化掉<a id="sec-3-1-2" name="sec-3-1-2"></a>
+### 如上面的动态图,目前展示了基本控件的进行一些初始化的封装,目的是将一些繁琐的初始化操作自动化掉<a id="sec-4-1-2" name="sec-4-1-2"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -281,9 +284,9 @@ Add the dependency
 </tbody>
 </table>
 
-## RecycleView<a id="sec-3-2" name="sec-3-2"></a>
+## RecycleView<a id="sec-4-2" name="sec-4-2"></a>
 
-### 属性<a id="sec-3-2-1" name="sec-3-2-1"></a>
+### 属性<a id="sec-4-2-1" name="sec-4-2-1"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -380,7 +383,7 @@ Add the dependency
 </tbody>
 </table>
 
-### 代码说明<a id="sec-3-2-2" name="sec-3-2-2"></a>
+### 代码说明<a id="sec-4-2-2" name="sec-4-2-2"></a>
 
 1.  单个布局的简单列表代码片段
 
@@ -580,33 +583,33 @@ Add the dependency
                 </LinearLayout>
             </LinearLayout>
         </layout>
-    
+
     5、创建layout和viewmodel变量的绑定关系包装类
-    
+
         // 这里根据class类型来控制不同的item
         public final ItemBinding<Object> multipleItems = ItemBinding.of(new OnItemBindClass<>()
                     .map(FooterVM.class, BR.footerVM, R.layout.default_loading)
                     .map(String.class, com.lwy.dbindingview.BR.item, R.layout.item_header_footer)
                     .map(ItemVM.class, com.lwy.dbindingview.BR.item, R.layout.item));
-    
+
     6、创建数据源
-    
+
         public final FooterVM footerVM = new FooterVM(new ReplyCommand<Integer>(new Action1<Integer>() {
-        
+
                 @Override
                 public void call(Integer integer) {
                     // 异步执行加载数据 完了需要调用 "footerVM.switchLoading(false)" 取消加载状态
                 }
             }));
-        
+
         public final ObservableList<ItemVM> items = new ObservableArrayList<>();
         public final MergeObservableList<Object> headerFooterItems = new MergeObservableList<>()
                     .insertItem("Header")
                     .insertList(items)
                     .insertItem(footerVM);
-    
+
     5、设置RecycleView的属性
-    
+
         ...
         <android.support.v7.widget.RecyclerView
                        android:id="@+id/list"
