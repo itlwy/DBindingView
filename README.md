@@ -29,9 +29,9 @@
 </div>
 </div>
 
-<div class="center">
-一个对databinding的常用封装库,包含基础控件及recycleview等
-</div>
+
+# 一个对databinding的常用封装库,包含基础控件及recycleview等
+
 
 # Screenshots<a id="sec-1" name="sec-1"></a>
 
@@ -171,7 +171,7 @@ Add the dependency
 <tr>
 <td class="left">BindingSpinner</td>
 <td class="left">selectedValue</td>
-<td class="left">ObservableField<KeyValue></td>
+<td class="left">KeyValue</td>
 <td class="left">&#xa0;</td>
 <td class="left">绑定选中的值</td>
 </tr>
@@ -180,7 +180,7 @@ Add the dependency
 <tr>
 <td class="left">&#xa0;</td>
 <td class="left">spinneritems</td>
-<td class="left">ObservableArrayList<KeyValue></td>
+<td class="left">List&lt;KeyValue&gt;</td>
 <td class="left">&#xa0;</td>
 <td class="left">spinner的适配器数据源</td>
 </tr>
@@ -190,7 +190,7 @@ Add the dependency
 <tr>
 <td class="left">DataBindingRadioGroup</td>
 <td class="left">checkedValue</td>
-<td class="left">ObservableField<KeyValue></td>
+<td class="left">KeyValue</td>
 <td class="left">&#xa0;</td>
 <td class="left">绑定RadioGroup选中的值</td>
 </tr>
@@ -209,7 +209,7 @@ Add the dependency
 <tr>
 <td class="left">BindingCheckGroup</td>
 <td class="left">selectedValues</td>
-<td class="left">ObservableField<String></td>
+<td class="left">String</td>
 <td class="left">&#xa0;</td>
 <td class="left">存储checkbox选中的值,默认用,分割</td>
 </tr>
@@ -317,7 +317,7 @@ Add the dependency
 
 <tr>
 <td class="left">items</td>
-<td class="left">List<T></td>
+<td class="left">List&lt;T&gt;</td>
 <td class="left">&#xa0;</td>
 <td class="left">必填,数据源</td>
 </tr>
@@ -325,7 +325,7 @@ Add the dependency
 
 <tr>
 <td class="left">adapter</td>
-<td class="left">BindingRecyclerViewAdapter<T></td>
+<td class="left">BindingRecyclerViewAdapter&lt;T&gt;</td>
 <td class="left">&#xa0;</td>
 <td class="left">选填,可继承BindingRecyclerViewAdapter自定义适配器</td>
 </tr>
@@ -333,7 +333,7 @@ Add the dependency
 
 <tr>
 <td class="left">itemIds</td>
-<td class="left">BindingRecyclerViewAdapter.ItemIds<? super T></td>
+<td class="left">BindingRecyclerViewAdapter.ItemIds&lt;? super T&gt;</td>
 <td class="left">&#xa0;</td>
 <td class="left">选填,不设置则默认使用position</td>
 </tr>
