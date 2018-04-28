@@ -3,11 +3,13 @@ package com.lwy.dbindingview.bindingadapter.recycleview;
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.lwy.dbindingview.ItemBinding;
 import com.lwy.dbindingview.LayoutManagers;
 import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
 import com.lwy.dbindingview.command.ReplyCommand;
+import com.lwy.dbindingview.command.ReplyCommand2;
 import com.lwy.dbindingview.data.RcVFooterVM;
 
 import java.util.List;
@@ -15,12 +17,13 @@ import java.util.List;
 public class ViewBindingAdapter {
     // RecyclerView
     @SuppressWarnings("unchecked")
-    @BindingAdapter(value = {"itemBinding", "items", "adapter", "itemIds", "viewHolder", "onItemClick"}, requireAll = false)
+    @BindingAdapter(value = {"itemBinding", "items", "adapter", "itemIds", "viewHolder", "onItemClick", "onItemLongClick"}, requireAll = false)
     public static <T> void setAdapter(RecyclerView recyclerView, ItemBinding<T> itemBinding,
                                       List<T> items, BindingRecyclerViewAdapter<T> adapter,
                                       BindingRecyclerViewAdapter.ItemIds<? super T> itemIds,
                                       BindingRecyclerViewAdapter.ViewHolderFactory viewHolderFactory,
-                                      BindingRecyclerViewAdapter.OnItemClickListener onItemClickListener) {
+                                      final ReplyCommand2 onItemClickCommand,
+                                      final ReplyCommand2 onItemLongClickCommand) {
         if (itemBinding == null) {
             throw new IllegalArgumentException("itemBinding must not be null");
         }
@@ -32,7 +35,24 @@ public class ViewBindingAdapter {
                 adapter = oldAdapter;
             }
         }
-        adapter.setOnItemClickListener(onItemClickListener);
+        if (onItemClickCommand != null || onItemLongClickCommand != null)
+            adapter.setOnItemClickListener(new BindingRecyclerViewAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                    if (onItemClickCommand != null) {
+                        onItemClickCommand.execute(holder, position);
+                    }
+                }
+
+                @Override
+                public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                    if (onItemLongClickCommand != null) {
+                        onItemLongClickCommand.execute(holder, position);
+                        return true;
+                    } else
+                        return false;
+                }
+            });
         adapter.setItemBinding(itemBinding);
         adapter.setItems(items);
         adapter.setItemIds(itemIds);

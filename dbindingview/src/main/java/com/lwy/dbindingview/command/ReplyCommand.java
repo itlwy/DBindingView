@@ -9,7 +9,6 @@ public class ReplyCommand<T> {
 
     private Action0 execute0;
     private Action1<T> execute1;
-
     private Func0<Boolean> canExecute0;
 
     public ReplyCommand(Action0 execute) {
@@ -22,8 +21,7 @@ public class ReplyCommand<T> {
     }
 
     /**
-     *
-     * @param execute callback for event
+     * @param execute     callback for event
      * @param canExecute0 if this function return true the action execute would be invoked! otherwise would't invoked!
      */
     public ReplyCommand(Action0 execute, Func0<Boolean> canExecute0) {
@@ -32,8 +30,7 @@ public class ReplyCommand<T> {
     }
 
     /**
-     *
-     * @param execute callback for event,this callback need a params
+     * @param execute     callback for event,this callback need a params
      * @param canExecute0 if this function return true the action execute would be invoked! otherwise would't invoked!
      */
     public ReplyCommand(Action1<T> execute, Func0<Boolean> canExecute0) {
