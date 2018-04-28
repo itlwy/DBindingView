@@ -9,7 +9,7 @@ public class ReplyCommand2<T1, T2> {
     private Action2<T1, T2> execute2;
     private Func0<Boolean> canExecute0;
 
-    public ReplyCommand2(Action2 execute) {
+    public ReplyCommand2(Action2<T1, T2> execute) {
         this.execute2 = execute;
     }
 
@@ -18,7 +18,7 @@ public class ReplyCommand2<T1, T2> {
      * @param execute     callback for event
      * @param canExecute0 if this function return true the action execute would be invoked! otherwise would't invoked!
      */
-    public ReplyCommand2(Action2 execute, Func0<Boolean> canExecute0) {
+    public ReplyCommand2(Action2<T1, T2> execute, Func0<Boolean> canExecute0) {
         this.execute2 = execute;
         this.canExecute0 = canExecute0;
     }
