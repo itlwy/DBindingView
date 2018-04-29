@@ -8,10 +8,11 @@ public class ResponseCommand<T, R> {
     private Func0<R> execute0;
     private Func1<T, R> execute1;
 
-    private Func0<Boolean> canExecute0;
+    private boolean canExecute= true;
 
     /**
      * like {@link ReplyCommand},but ResponseCommand can return result when command has executed!
+     *
      * @param execute function to execute when event occur.
      */
     public ResponseCommand(Func0<R> execute) {
@@ -24,35 +25,28 @@ public class ResponseCommand<T, R> {
     }
 
 
-    public ResponseCommand(Func0<R> execute, Func0<Boolean> canExecute0) {
+    public ResponseCommand(Func0<R> execute, boolean canExecute) {
         this.execute0 = execute;
-        this.canExecute0 = canExecute0;
+        this.canExecute = canExecute;
     }
 
 
-    public ResponseCommand(Func1<T, R> execute, Func0<Boolean> canExecute0) {
+    public ResponseCommand(Func1<T, R> execute, boolean canExecute) {
         this.execute1 = execute;
-        this.canExecute0 = canExecute0;
+        this.canExecute = canExecute;
     }
 
 
     public R execute() {
-        if (execute0 != null && canExecute0()) {
+        if (execute0 != null && canExecute) {
             return execute0.call();
         }
         return null;
     }
 
-    private boolean canExecute0() {
-        if (canExecute0 == null) {
-            return true;
-        }
-        return canExecute0.call();
-    }
-
 
     public R execute(T parameter) {
-        if (execute1 != null && canExecute0()) {
+        if (execute1 != null && canExecute) {
             return execute1.call(parameter);
         }
         return null;

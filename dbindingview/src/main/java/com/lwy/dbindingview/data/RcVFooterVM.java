@@ -3,7 +3,7 @@ package com.lwy.dbindingview.data;
 import com.lwy.dbindingview.command.ReplyCommand;
 
 /**
- * Created by mac on 2018/4/10.
+ * Created by lwy on 2018/4/10.
  */
 
 public abstract class RcVFooterVM {

@@ -96,7 +96,6 @@ public class ViewBindingAdapter {
 
     }
 
-    @SuppressWarnings("unchecked")
     @BindingAdapter("footerVM")
     public static void onLoadMoreCommand(final RecyclerView recyclerView, final RcVFooterVM rcVFooterVM) {
         RecyclerView.OnScrollListener listener = new OnScrollListener(rcVFooterVM);

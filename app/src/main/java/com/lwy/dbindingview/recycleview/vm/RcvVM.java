@@ -16,7 +16,6 @@ import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
 import com.lwy.dbindingview.collections.MergeObservableList;
 import com.lwy.dbindingview.command.ReplyCommand;
 import com.lwy.dbindingview.command.functions.Action0;
-import com.lwy.dbindingview.command.functions.Action1;
 import com.lwy.dbindingview.itembindings.OnItemBindClass;
 import com.lwy.dbindingview.recycleview.LoggingRecyclerViewAdapter;
 
@@ -51,10 +50,10 @@ public class RcvVM {
         }
     });
 
-    public final FooterVM footerVM = new FooterVM(new ReplyCommand<Integer>(new Action1<Integer>() {
+    public final FooterVM footerVM = new FooterVM(new ReplyCommand(new Action0() {
 
         @Override
-        public void call(Integer integer) {
+        public void call() {
             new AsyncTask<Void, Void, Integer>() {
                 @Override
                 protected Integer doInBackground(Void... voids) {

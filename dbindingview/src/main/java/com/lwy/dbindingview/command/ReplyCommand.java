@@ -3,13 +3,12 @@ package com.lwy.dbindingview.command;
 
 import com.lwy.dbindingview.command.functions.Action0;
 import com.lwy.dbindingview.command.functions.Action1;
-import com.lwy.dbindingview.command.functions.Func0;
 
 public class ReplyCommand<T> {
 
     private Action0 execute0;
     private Action1<T> execute1;
-    private Func0<Boolean> canExecute0;
+    private boolean canExecute = true;
 
     public ReplyCommand(Action0 execute) {
         this.execute0 = execute;
@@ -21,40 +20,33 @@ public class ReplyCommand<T> {
     }
 
     /**
-     * @param execute     callback for event
-     * @param canExecute0 if this function return true the action execute would be invoked! otherwise would't invoked!
+     * @param execute    callback for event
+     * @param canExecute if this function return true the action execute would be invoked! otherwise would't invoked!
      */
-    public ReplyCommand(Action0 execute, Func0<Boolean> canExecute0) {
+    public ReplyCommand(Action0 execute, boolean canExecute) {
         this.execute0 = execute;
-        this.canExecute0 = canExecute0;
+        this.canExecute = canExecute;
     }
 
     /**
-     * @param execute     callback for event,this callback need a params
-     * @param canExecute0 if this function return true the action execute would be invoked! otherwise would't invoked!
+     * @param execute    callback for event,this callback need a params
+     * @param canExecute if this function return true the action execute would be invoked! otherwise would't invoked!
      */
-    public ReplyCommand(Action1<T> execute, Func0<Boolean> canExecute0) {
+    public ReplyCommand(Action1<T> execute, boolean canExecute) {
         this.execute1 = execute;
-        this.canExecute0 = canExecute0;
+        this.canExecute = canExecute;
     }
 
 
     public void execute() {
-        if (execute0 != null && canExecute0()) {
+        if (execute0 != null && canExecute) {
             execute0.call();
         }
     }
 
-    private boolean canExecute0() {
-        if (canExecute0 == null) {
-            return true;
-        }
-        return canExecute0.call();
-    }
-
 
     public void execute(T parameter) {
-        if (execute1 != null && canExecute0()) {
+        if (execute1 != null && canExecute) {
             execute1.call(parameter);
         }
     }
