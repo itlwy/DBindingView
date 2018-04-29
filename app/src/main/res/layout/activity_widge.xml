@@ -25,7 +25,7 @@
             android:layout_weight="0"
             android:gravity="center"
             android:padding="@dimen/padding_medium"
-            android:text="@{String.format(`地址:%s\r\n辖区:%s\r\n街道:%s\r\n性别:%s\r\n爱好:%s`,viewmodel.address.get(),viewmodel.selectedArea.get().value,viewmodel.selectedStreet.get().value,viewmodel.sex.value,viewmodel.hobby.get())}"
+            android:text="@{String.format(`地址:%s\r\n辖区:%s\r\n街道:%s\r\n性别:%s\r\n爱好数:%s`,viewmodel.address.get(),viewmodel.selectedArea.get().value,viewmodel.selectedStreet.get().value,viewmodel.sex.value,viewmodel.hobby.size())}"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_title"
             tools:text="地址:%s,辖区:%s,街道:%s"/>
@@ -152,21 +152,9 @@
                         android:layout_marginRight="@dimen/margin_medium"
                         android:layout_weight="10"
                         android:orientation="horizontal"
-                        app:checkedValue="@={viewmodel.sex}">
+                        app:items="@{viewmodel.sexList}"
+                        app:checkedValue="@={viewmodel.sex}"/>
 
-                        <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/margin_medium"
-                            app:value="@{viewmodel.sex_male}"/>
-
-                        <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_medium"
-                            app:value="@{viewmodel.sex_female}"
-                            />
-                    </com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup>
                 </LinearLayout>
 
                 <LinearLayout
@@ -192,24 +180,10 @@
                         android:layout_marginLeft="@dimen/margin_medium"
                         android:layout_marginRight="@dimen/margin_medium"
                         android:layout_weight="10"
-                        app:selectedValues="@={viewmodel.hobby}"
-                        app:separator="@{viewmodel.cbSeparator}">
+                        app:items="@{viewmodel.hobbys}"
+                        app:selectedValues="@{viewmodel.hobby}"/>
 
-                        <com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="看代码"/>
 
-                        <com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="敲代码"/>
-
-                        <com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="还是代码"/>
-                    </com.lwy.dbindingview.bindingadapter.checkbox.BindingCheckGroup>
                 </LinearLayout>
 
                 <LinearLayout

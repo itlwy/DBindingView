@@ -8,10 +8,6 @@ import android.view.ViewGroup;
 
 import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
 
-
-/**
- * Created by evan on 6/30/15.
- */
 public class LoggingRecyclerViewAdapter<T> extends BindingRecyclerViewAdapter<T> {
     public static final String TAG = "RecyclerView";
 

@@ -10,7 +10,7 @@ import com.lwy.dbindingview.recycleview.RecycleViewActivity1;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by mac on 2018/4/23.
+ * Created by lwy on 2018/4/23.
  */
 
 public class MainVM {

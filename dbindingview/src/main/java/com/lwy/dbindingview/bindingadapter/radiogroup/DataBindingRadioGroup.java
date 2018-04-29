@@ -8,13 +8,17 @@ import android.databinding.InverseBindingMethods;
 import android.support.annotation.IdRes;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
 import com.lwy.dbindingview.data.KeyValue;
+import com.lwy.dbindingview.utils.DensityUtil;
+
+import java.util.List;
 
 
 /**
- * Created by mac on 2017/11/3.
+ * Created by lwy on 2017/11/3.
  */
 
 @InverseBindingMethods({
@@ -108,6 +112,24 @@ public class DataBindingRadioGroup extends RadioGroup {
 //    public interface OnValueChangedListener {
 //        void onValueChanged();
 //    }
+
+    @BindingAdapter("items")
+    public static void setItems(DataBindingRadioGroup radioGroup, List<KeyValue> items) {
+        if (items != null) {
+            radioGroup.removeAllViews();
+            if (items.size() > 0) {
+                LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.rightMargin = DensityUtil.dip2px(radioGroup.getContext(), 10);
+                for (KeyValue item : items) {
+                    DataBindingRadioButton rb = new DataBindingRadioButton(radioGroup.getContext());
+                    rb.setLayoutParams(params);
+                    radioGroup.addView(rb);
+                    DataBindingRadioButton.setValue(rb, item);
+                }
+            }
+        }
+
+    }
 
     @BindingAdapter("checkedValueAttrChanged")
     public static void setValueChangedListener(DataBindingRadioGroup view, final InverseBindingListener bindingListener) {

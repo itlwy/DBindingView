@@ -13,7 +13,7 @@ import static com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGro
 
 
 /**
- * Created by mac on 2017/11/3.
+ * Created by lwy on 2017/11/3.
  */
 
 public class DataBindingRadioButton extends AppCompatRadioButton {

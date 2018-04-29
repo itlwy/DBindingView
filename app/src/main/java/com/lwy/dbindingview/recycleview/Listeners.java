@@ -2,9 +2,6 @@ package com.lwy.dbindingview.recycleview;
 
 import com.lwy.dbindingview.recycleview.vm.RcvVM;
 
-/**
- * Created by evan on 6/3/15.
- */
 public class Listeners {
     private RcvVM viewModel;
 

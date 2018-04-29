@@ -3,7 +3,7 @@ package com.lwy.dbindingview.data;
 import java.io.Serializable;
 
 /**
- * Created by mac on 2017/11/15.
+ * Created by lwy on 2017/11/15.
  */
 
 public class KeyValue implements Serializable {
@@ -27,5 +27,18 @@ public class KeyValue implements Serializable {
 
     public KeyValue() {
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof KeyValue))
+            return false;
+        KeyValue kv2 = (KeyValue) obj;
+        if (this.key == kv2.key && this.value.equals(kv2.value))
+            return true;
+        else
+            return false;
     }
 }

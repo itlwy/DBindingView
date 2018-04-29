@@ -6,19 +6,19 @@ import android.databinding.InverseBindingListener;
 import android.databinding.InverseBindingMethod;
 import android.databinding.InverseBindingMethods;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.lwy.dbindingview.data.KeyValue;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
- * Created by mac on 2017/11/6.
+ * Created by lwy on 2017/11/6.
  */
 
 @InverseBindingMethods({
@@ -30,24 +30,14 @@ import java.util.Map;
 })
 public class BindingCheckGroup extends LinearLayout {
 
-    private String separator;
-    private String selectedValues;
+    private List<KeyValue> viewSelectedValues = new ArrayList<>();
+    private List<KeyValue> sourcesSelectedValues;
     private InverseBindingListener listener;
+    private List<KeyValue> dataSources;
 
-    public String getSeparator() {
-        return separator;
-    }
-
-    public void setSeparator(String separator) {
-        this.separator = separator;
-    }
 
     public void setListener(InverseBindingListener listener) {
         this.listener = listener;
-    }
-
-    public String getSelectedValues() {
-        return selectedValues;
     }
 
     public BindingCheckGroup(Context context) {
@@ -70,31 +60,42 @@ public class BindingCheckGroup extends LinearLayout {
 
     }
 
-    @BindingAdapter(value = {"selectedValues", "separator"}, requireAll = false)
-    public static void setSelectedValues(BindingCheckGroup view, String selectedValues, String separator) {
-        view.setSeparator(TextUtils.isEmpty(separator) ? "," : separator);
-        if (selectedValues != null && !selectedValues.equals(view.selectedValues)) {
-            List<String> selectedList = splitAsList(selectedValues, view.getSeparator());
-            List<String> viewSelectedList = splitAsList(view.selectedValues, view.getSeparator());
 
-            List<String> differentList = getdifferentList(viewSelectedList, selectedList);
-            if (differentList.size() > 0) {
-                // 有变化
+    @BindingAdapter("items")
+    public static void setItems(BindingCheckGroup view, List<KeyValue> dataSources) {
+        view.dataSources = dataSources;
+        if (dataSources != null) {
+            view.removeAllViews();
+            LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            for (KeyValue dataSource : dataSources) {
+                BindingCheckBox cb = new BindingCheckBox(view.getContext());
+                cb.setLayoutParams(params);
+                cb.setValue(dataSource);
+                view.addView(cb);
+            }
+        }
+    }
+
+    @BindingAdapter("selectedValues")
+    public static void setSelectedValues(BindingCheckGroup view, List<KeyValue> selectedValues) {
+        view.sourcesSelectedValues = selectedValues;
+        if (selectedValues != null) {
+            if (!isSameList(view.viewSelectedValues, selectedValues)) {
+                // have changed
                 for (int i = 0; i < view.getChildCount(); i++) {
                     View childView = view.getChildAt(i);
                     if (childView instanceof BindingCheckBox) {
                         BindingCheckBox cb = ((BindingCheckBox) childView);
-                        String cbSelValue = cb.getText().toString();
-                        if (differentList.contains(cbSelValue)) {
-                            if (viewSelectedList.contains(cbSelValue))
-                                cb.setChecked(false);
-                            else
-                                cb.setChecked(true);
-                        }
+                        KeyValue cbSelValue = cb.getValue();
+                        if (selectedValues.contains(cbSelValue))
+                            cb.setChecked(true);
+                        else
+                            cb.setChecked(false);
                     }
                 }
             }
-            view.selectedValues = selectedValues;
+            view.viewSelectedValues.clear();
+            view.viewSelectedValues.addAll(selectedValues);
         }
     }
 
@@ -108,65 +109,34 @@ public class BindingCheckGroup extends LinearLayout {
         }
     }
 
-    public void notifyValuesChange(int checkBoxID, String checkBoxLabel, boolean ischeck) {
-        List<String> selectedList = splitAsList(this.selectedValues, separator);
+    public void notifyValuesChange(int checkBoxID, KeyValue checkedValue, boolean ischeck) {
         if (ischeck) {
             // TODO: 2017/11/6 换成不允许重复的集合
-            if (!selectedList.contains(checkBoxLabel))
-                selectedList.add(checkBoxLabel);
+            if (!viewSelectedValues.contains(checkedValue)) {
+                viewSelectedValues.add(checkedValue);
+                sourcesSelectedValues.add(checkedValue);
+            }
         } else {
-            selectedList.remove(checkBoxLabel);
+            viewSelectedValues.remove(checkedValue);
+            sourcesSelectedValues.remove(checkedValue);
         }
 
-        this.selectedValues = joinFromList(selectedList, separator);
         if (this.listener != null) {
             this.listener.onChange();
         }
     }
 
-    static List<String> getdifferentList(List<String> list1, List<String> list2) {
-        Map<String, Integer> map = new HashMap();
-        List<String> longList = list1;
-        List<String> shortList = list2;
-        if (list2.size() > list1.size()) {
-            longList = list2;
-            shortList = list1;
-        }
-        for (String string : shortList) {//将shortList放到map中，map的value任意数字即可
-            map.put(string, 0);
-        }
-//        shortList.clear();//清空shortList，用于存放longList中有map中没有的数据
-        List<String> diffList = new ArrayList<>();
-        Integer in;
-        for (String string : longList) {
-            in = map.get(string);
-            if (null == in) {
-                diffList.add(string);//longList中有map中没有的数据
+    static boolean isSameList(List<KeyValue> list1, List<KeyValue> list2) {
+        if (list1 == list2)
+            return true;
+        if (list1.size() != list2.size())
+            return false;
+        for (KeyValue keyValue : list2) {
+            if (!list1.contains(keyValue)) {
+                return false;
             }
         }
-        return diffList;
+        return true;
     }
 
-    static List<String> splitAsList(String str, String splitter) {
-        ArrayList<String> list = new ArrayList<>();
-        if (TextUtils.isEmpty(str))
-            return list;
-        String[] array = str.split(splitter);
-        for (int i = 0; i < array.length; i++) {
-            list.add(array[i]);
-        }
-        return list;
-    }
-
-    static String joinFromList(List<String> list, String splitter) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            String item = list.get(i);
-            sb.append(item).append(splitter);
-        }
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 1);
-        }
-        return sb.toString();
-    }
 }

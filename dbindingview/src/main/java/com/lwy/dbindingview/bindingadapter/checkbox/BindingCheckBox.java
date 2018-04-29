@@ -4,11 +4,26 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
 
+import com.lwy.dbindingview.data.KeyValue;
+
 /**
- * Created by mac on 2017/11/6.
+ * Created by lwy on 2017/11/6.
  */
 
 public class BindingCheckBox extends android.support.v7.widget.AppCompatCheckBox {
+
+    private KeyValue value = new KeyValue();
+
+    public KeyValue getValue() {
+        return value;
+    }
+
+    public void setValue(KeyValue value) {
+        this.value.key = value.key;
+        this.value.value = value.value;
+        setText(value.value);
+    }
+
     public BindingCheckBox(Context context) {
         super(context);
         init(context, null, 0);
@@ -31,7 +46,7 @@ public class BindingCheckBox extends android.support.v7.widget.AppCompatCheckBox
                 if (getParent() instanceof BindingCheckGroup) {
                     BindingCheckGroup bGroup = (BindingCheckGroup) getParent();
                     bGroup.notifyValuesChange(BindingCheckBox.this.getId()
-                            , BindingCheckBox.this.getText().toString(), b);
+                            , value, b);
                 }
             }
         });

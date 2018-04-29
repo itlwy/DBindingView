@@ -40,12 +40,13 @@ public class WidgetVM {
     public JSONObject streetJson;
 
     public final ObservableField<KeyValue> sex = new ObservableField<>();
-    public final KeyValue sex_male = new KeyValue(1,"男");
-    public final KeyValue sex_female = new KeyValue(0,"女");
 
-    public String cbSeparator = "@";
+    public final ObservableArrayList<KeyValue> sexList = new ObservableArrayList<>();
 
-    public final ObservableField<String> hobby = new ObservableField<>();
+//    public String cbSeparator = "@";
+
+    public final ObservableArrayList<KeyValue> hobbys = new ObservableArrayList<>();
+    public final ObservableArrayList<KeyValue> hobby = new ObservableArrayList<>();
 
     public final ObservableField<String> imageUri = new ObservableField<>();
 
@@ -60,6 +61,17 @@ public class WidgetVM {
     public WidgetVM(IView view) {
 //        mView = new WeakReference<IView>(view);
         init();
+        KeyValue sex_male = new KeyValue(1, "男");
+        KeyValue sex_female = new KeyValue(0, "女");
+        sexList.add(sex_male);
+        sexList.add(sex_female);
+
+        KeyValue hb1 = new KeyValue(1, "敲代码1");
+        KeyValue hb2 = new KeyValue(2, "敲代码2");
+        KeyValue hb3 = new KeyValue(3, "敲代码3");
+        hobbys.add(hb1);
+        hobbys.add(hb2);
+        hobbys.add(hb3);
     }
 
     private void init() {
@@ -71,7 +83,7 @@ public class WidgetVM {
             Iterator<String> iter = streetJson.keys();
             while (iter.hasNext()) {
                 String key = iter.next();
-                KeyValue keyValue = new KeyValue(areaList.size()+1, key);
+                KeyValue keyValue = new KeyValue(areaList.size() + 1, key);
                 areaList.add(keyValue);
             }
             initObserver();

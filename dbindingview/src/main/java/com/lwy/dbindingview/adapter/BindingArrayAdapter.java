@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * Created by mac on 2017/11/20.
+ * Created by lwy on 2017/11/20.
  */
 
 public class BindingArrayAdapter extends ArrayAdapter<String> {

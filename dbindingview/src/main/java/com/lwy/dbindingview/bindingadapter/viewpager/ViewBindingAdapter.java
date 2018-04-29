@@ -10,7 +10,7 @@ import com.lwy.dbindingview.command.ReplyCommand;
 import java.util.List;
 
 /**
- * Created by mac on 2018/4/5.
+ * Created by lwy on 2018/4/5.
  */
 
 public class ViewBindingAdapter {
