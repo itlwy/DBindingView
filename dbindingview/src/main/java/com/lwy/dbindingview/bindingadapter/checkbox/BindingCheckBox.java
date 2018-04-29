@@ -12,15 +12,14 @@ import com.lwy.dbindingview.data.KeyValue;
 
 public class BindingCheckBox extends android.support.v7.widget.AppCompatCheckBox {
 
-    private KeyValue value = new KeyValue();
+    private KeyValue value;
 
-    public KeyValue getValue() {
+    KeyValue getValue() {
         return value;
     }
 
     public void setValue(KeyValue value) {
-        this.value.key = value.key;
-        this.value.value = value.value;
+        this.value = value;
         setText(value.value);
     }
 

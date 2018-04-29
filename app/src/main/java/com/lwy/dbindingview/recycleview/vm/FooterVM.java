@@ -24,7 +24,7 @@ public class FooterVM extends RcVFooterVM {
         }
     });
 
-    private ReplyCommand<Integer> callback;
+    private ReplyCommand callback;
 
 
     public final ObservableField<String> noMoreTip = new ObservableField<>();
