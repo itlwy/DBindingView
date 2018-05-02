@@ -1,5 +1,5 @@
 <div id="table-of-contents">
-<h2>目录</h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. 写在前面</a></li>
@@ -15,7 +15,7 @@
 <li><a href="#sec-4-1">4.1. 一般控件</a>
 <ul>
 <li><a href="#sec-4-1-1">4.1.1. 涉及到的类</a></li>
-<li><a href="#sec-4-1-2">4.1.2. 如上面的动态图,目前展示了基本控件的进行一些初始化的封装,目的是将一些繁琐的初始化操作自动化掉</a></li>
+<li><a href="#sec-4-1-2">4.1.2. 属性</a></li>
 </ul>
 </li>
 <li><a href="#sec-4-2">4.2. RecycleView</a>
@@ -38,7 +38,8 @@ Android DataBinding介绍](https://blog.csdn.net/tianjf0514/article/details/7519
 
 # 缩略图<a id="sec-2" name="sec-2"></a>
 
-![normalWidget](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview.gif) ![recycleview](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview1.gif)
+![normalWidget](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview.gif)
+![recycleview](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview1.gif)
 
 # 如何引入<a id="sec-3" name="sec-3"></a>
 
@@ -65,6 +66,8 @@ Add the dependency
 
 ## 一般控件<a id="sec-4-1" name="sec-4-1"></a>
 
+如上面的动态图,目前展示了基本控件的进行一些初始化的封装,目的是将一些繁琐的初始化操作自动化掉。注意,这里用到的属性均是自定义属性,前缀请用app:
+
 ### 涉及到的类<a id="sec-4-1-1" name="sec-4-1-1"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -89,21 +92,7 @@ Add the dependency
 <tr>
 <td class="left">KeyValue</td>
 <td class="left">com.lwy.dbindingview.data</td>
-<td class="left">存储key(Integer)-value(String)</td>
-</tr>
-
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">主要用于spinner、checkbox、radiogroup</td>
-</tr>
-
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">等,实现数据源的key-label模式</td>
+<td class="left">存储key(Integer)-value(String),主要用于spinner、checkbox、radiogroup等,实现数据源的key-label模式</td>
 </tr>
 </tbody>
 
@@ -132,7 +121,7 @@ Add the dependency
 <tr>
 <td class="left">BindingCheckGroup</td>
 <td class="left">com.lwy.dbindingview.bindingadapter.checkbox</td>
-<td class="left">封装的双向绑定自定义LinearLayout</td>
+<td class="left">封装的双向绑定自定义LinearLayout,用作BindingCheckBox容器</td>
 </tr>
 
 
@@ -144,7 +133,7 @@ Add the dependency
 </tbody>
 </table>
 
-### 如上面的动态图,目前展示了基本控件的进行一些初始化的封装,目的是将一些繁琐的初始化操作自动化掉<a id="sec-4-1-2" name="sec-4-1-2"></a>
+### 属性<a id="sec-4-1-2" name="sec-4-1-2"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -200,6 +189,15 @@ Add the dependency
 
 
 <tr>
+<td class="left">&#xa0;</td>
+<td class="left">items</td>
+<td class="left">List&lt;KeyValue&gt;</td>
+<td class="left">&#xa0;</td>
+<td class="left">设置该属性可动态渲染子view</td>
+</tr>
+
+
+<tr>
 <td class="left">DataBindingRadioButton</td>
 <td class="left">value</td>
 <td class="left">KeyValue</td>
@@ -220,14 +218,23 @@ Add the dependency
 
 <tr>
 <td class="left">&#xa0;</td>
-<td class="left">separator</td>
-<td class="left">String</td>
+<td class="left">items</td>
+<td class="left">List&lt;KeyValue&gt;</td>
 <td class="left">&#xa0;</td>
-<td class="left">设置checkbox选中项的拼接符号</td>
+<td class="left">设置该属性可动态渲染子view</td>
 </tr>
 </tbody>
 
 <tbody>
+<tr>
+<td class="left">BindingCheckBox</td>
+<td class="left">value</td>
+<td class="left">KeyValue</td>
+<td class="left">&#xa0;</td>
+<td class="left">设置值</td>
+</tr>
+
+
 <tr>
 <td class="left">ImageView</td>
 <td class="left">uri</td>
@@ -241,14 +248,14 @@ Add the dependency
 <td class="left">&#xa0;</td>
 <td class="left">placeholderImageRes</td>
 <td class="left">int</td>
-<td class="left">eg:R.mipmap.ic\_launcher</td>
+<td class="left">eg:R.mipmap.ic_launcher</td>
 <td class="left">占位图</td>
 </tr>
 
 
 <tr>
 <td class="left">&#xa0;</td>
-<td class="left">request\_width、request\_width</td>
+<td class="left">request_width、request_width</td>
 <td class="left">int</td>
 <td class="left">&#xa0;</td>
 <td class="left">设置图片的大小,不设置默认用view的大小,2个属性必修同时设置才有效</td>
@@ -272,17 +279,47 @@ Add the dependency
 <td class="left">&#xa0;</td>
 <td class="left">控制view的Visibility</td>
 </tr>
-
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
 </tbody>
 </table>
+
+具体使用很简单,直接看demo&#x2013;>com.lwy.dbindingview.base_widget.WidgeActivity
+
+这里说明下DataBindingRadioGroup和BindingCheckGroup,
+
+    <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup
+                          android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="@dimen/margin_medium"
+                          android:layout_marginRight="@dimen/margin_medium"
+                          android:layout_weight="10"
+                          android:orientation="horizontal"
+                          app:items="@{viewmodel.sexList}"
+                          app:checkedValue="@={viewmodel.sex}"/>
+
+这里的app:items属性,让其根据sexList动态渲染子view(DataBindingRadioButton),也可以选择在布局里直接写子View，如：
+
+    <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_medium"
+                            android:layout_marginRight="@dimen/margin_medium"
+                            android:layout_weight="10"
+                            android:orientation="horizontal"
+                            app:items="@{viewmodel.sexList}"
+                            app:checkedValue="@={viewmodel.sex}">
+                            <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
+                                android:layout_width="wrap_content"
+                                app:value="@{viewmodel.sex_male}"
+                                android:layout_height="wrap_content"/>
+                            <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
+                                android:layout_width="wrap_content"
+                                app:value="@{viewmodel.sex_female}"
+                                android:layout_height="wrap_content"/>
+                        </com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup>
+
+---
+
+BindingCheckGroup同理
 
 ## RecycleView<a id="sec-4-2" name="sec-4-2"></a>
 
@@ -488,7 +525,20 @@ Add the dependency
 
         public class FooterVM extends RcVFooterVM {
 
-            private ReplyCommand<Integer> callback;
+            public final ReplyCommand clickCommand = new ReplyCommand(new Action0() {
+                @Override
+                public void call() {
+                    if (!getIsFooterLoading().get()) {
+                        switchLoading(true);
+                        callback.execute();
+                    }
+
+                }
+            });
+
+            private ReplyCommand callback;
+
+
             public final ObservableField<String> noMoreTip = new ObservableField<>();
             /*
                 state : 0 loading
@@ -497,10 +547,10 @@ Add the dependency
             public final ObservableField<Integer> state = new ObservableField<>();
 
 
-            public FooterVM(ReplyCommand<Integer> callback) {
+            public FooterVM(ReplyCommand callback) {
                 super();
                 this.callback = callback;
-                state.set(1);
+                switchLoading(false);
                 noMoreTip.set("暂无更多");
             }
 
@@ -509,7 +559,7 @@ Add the dependency
                 return new ReplyCommand<>(new Action1<Integer>() {
                     @Override
                     public void call(Integer integer) {
-                        FooterVM.this.callback.execute(integer);
+                        FooterVM.this.callback.execute();
         //                switchLoading(true);
                     }
                 });
@@ -526,7 +576,7 @@ Add the dependency
             }
         }
 
-    4、创建footer的布局文件R.layout.default\_loading
+    4、创建footer的布局文件R.layout.default_loading
 
         <layout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -539,11 +589,11 @@ Add the dependency
                     type="com.lwy.dbindingview.recycleview.vm.FooterVM"/>
             </data>
 
-            <LinearLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
+                android:orientation="vertical"
+                app:clickCommand="@{footerVM.clickCommand}">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
