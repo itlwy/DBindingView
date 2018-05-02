@@ -59,7 +59,7 @@ Add the JitPack repository to your build file
 Add the dependency
 
     dependencies {
-                    compile 'com.github.itlwy:DBindingView:v1.0.2'
+                    compile 'com.github.itlwy:DBindingView:v1.0.7'
             }
 
 # 如何使用<a id="sec-4" name="sec-4"></a>
