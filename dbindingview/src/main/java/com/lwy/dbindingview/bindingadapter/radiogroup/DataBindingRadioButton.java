@@ -58,7 +58,7 @@ public class DataBindingRadioButton extends AppCompatRadioButton {
         radioButton.setValue(value);
         ViewParent parent = radioButton.getParent();
         if (parent instanceof DataBindingRadioGroup) {
-            KeyValue checkedValue = ((DataBindingRadioGroup) parent).getCheckedValue();
+            KeyValue checkedValue = ((DataBindingRadioGroup) parent).getSelectedValue();
             if (checkedValue != null) {
                 radioButton.setChecked(isSame(checkedValue.key, value.key));
             } else

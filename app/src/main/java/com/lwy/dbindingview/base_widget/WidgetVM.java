@@ -66,9 +66,9 @@ public class WidgetVM {
         sexList.add(sex_male);
         sexList.add(sex_female);
 
-        KeyValue hb1 = new KeyValue(1, "敲代码1");
-        KeyValue hb2 = new KeyValue(2, "敲代码2");
-        KeyValue hb3 = new KeyValue(3, "敲代码3");
+        KeyValue hb1 = new KeyValue(1, "看书");
+        KeyValue hb2 = new KeyValue(2, "看电影");
+        KeyValue hb3 = new KeyValue(3, "敲代码");
         hobbys.add(hb1);
         hobbys.add(hb2);
         hobbys.add(hb3);
