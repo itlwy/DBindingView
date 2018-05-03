@@ -24,14 +24,14 @@ import java.util.List;
 @InverseBindingMethods({
         @InverseBindingMethod(
                 type = DataBindingRadioGroup.class,
-                attribute = "checkedValue",
-                event = "checkedValueAttrChanged",
-                method = "getCheckedValue")
+                attribute = "selectedValue",
+                event = "selectedValueAttrChanged",
+                method = "getSelectedValue")
 })
 public class DataBindingRadioGroup extends RadioGroup {
 
     //    private InverseBindingListener mBindingListener;
-    private KeyValue checkedValue;
+    private KeyValue selectedValue;
     //    private OnValueChangedListener listener;
     private InverseBindingListener listener;
 
@@ -52,43 +52,43 @@ public class DataBindingRadioGroup extends RadioGroup {
                 if (checkedId > 0) {
                     DataBindingRadioButton radioButton = (DataBindingRadioButton) findViewById(checkedId);
                     KeyValue keyValue = new KeyValue(radioButton.getValue().key, radioButton.getValue().value);
-                    setCheckedValue(radioButton.isChecked() ? keyValue : null);
+                    setSelectedValue(radioButton.isChecked() ? keyValue : null);
                 } else {
-                    setCheckedValue(null);
+                    setSelectedValue(null);
                 }
             }
         });
     }
 
-    public KeyValue getCheckedValue() {
-        return checkedValue;
+    public KeyValue getSelectedValue() {
+        return selectedValue;
     }
 
-    public void setCheckedValue(KeyValue checkedValue) {
-        if (checkedValue != null && this.checkedValue != null) {
-            Integer inputKey = checkedValue.key;
-            Integer originKey = this.checkedValue.key;
+    public void setSelectedValue(KeyValue selectedValue) {
+        if (selectedValue != null && this.selectedValue != null) {
+            Integer inputKey = selectedValue.key;
+            Integer originKey = this.selectedValue.key;
             if (isSame(originKey, inputKey)) {
                 return;
             }
         }
-        if (checkedValue == null && this.checkedValue == null)
+        if (selectedValue == null && this.selectedValue == null)
             return;
 
-        this.checkedValue = checkedValue;
+        this.selectedValue = selectedValue;
 
-        if (this.checkedValue == null) {
+        if (this.selectedValue == null) {
             clearCheck();
         } else {
             DataBindingRadioButton customRadioButton = findViewById(getCheckedRadioButtonId());
-            Integer key = this.checkedValue.key;
+            Integer key = this.selectedValue.key;
             if (customRadioButton == null || !isSame(key, customRadioButton.getValue().key)) {
 
                 for (int i = 0; i < getChildCount(); i++) {
                     View child = getChildAt(i);
                     if (child instanceof DataBindingRadioButton) {
                         Integer value = ((DataBindingRadioButton) child).getValue().key;
-                        if (isSame(this.checkedValue.key, value)) {
+                        if (isSame(this.selectedValue.key, value)) {
                             ((DataBindingRadioButton) child).setChecked(true);
                         }
                     }
@@ -131,7 +131,7 @@ public class DataBindingRadioGroup extends RadioGroup {
 
     }
 
-    @BindingAdapter("checkedValueAttrChanged")
+    @BindingAdapter("selectedValueAttrChanged")
     public static void setValueChangedListener(DataBindingRadioGroup view, final InverseBindingListener bindingListener) {
         if (bindingListener == null) {
             view.setListener(null);

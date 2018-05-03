@@ -38,8 +38,7 @@ Android DataBinding介绍](https://blog.csdn.net/tianjf0514/article/details/7519
 
 # 缩略图<a id="sec-2" name="sec-2"></a>
 
-![normalWidget](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview.gif)
-![recycleview](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview1.gif)
+![normalWidget](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview.gif) ![recycleview](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview1.gif)
 
 # 如何引入<a id="sec-3" name="sec-3"></a>
 
@@ -59,7 +58,7 @@ Add the JitPack repository to your build file
 Add the dependency
 
     dependencies {
-                    compile 'com.github.itlwy:DBindingView:v1.0.7'
+                    compile 'com.github.itlwy:DBindingView:v1.0.8'
             }
 
 # 如何使用<a id="sec-4" name="sec-4"></a>
@@ -181,7 +180,7 @@ Add the dependency
 <tbody>
 <tr>
 <td class="left">DataBindingRadioGroup</td>
-<td class="left">checkedValue</td>
+<td class="left">selectedValue</td>
 <td class="left">KeyValue</td>
 <td class="left">&#xa0;</td>
 <td class="left">绑定RadioGroup选中的值</td>
@@ -210,7 +209,7 @@ Add the dependency
 <tr>
 <td class="left">BindingCheckGroup</td>
 <td class="left">selectedValues</td>
-<td class="left">String</td>
+<td class="left">List&lt;KeyValue&gt;</td>
 <td class="left">&#xa0;</td>
 <td class="left">存储checkbox选中的值,默认用,分割</td>
 </tr>
@@ -294,7 +293,7 @@ Add the dependency
                           android:layout_weight="10"
                           android:orientation="horizontal"
                           app:items="@{viewmodel.sexList}"
-                          app:checkedValue="@={viewmodel.sex}"/>
+                          app:selectedValue="@={viewmodel.sex}"/>
 
 这里的app:items属性,让其根据sexList动态渲染子view(DataBindingRadioButton),也可以选择在布局里直接写子View，如：
 
@@ -306,7 +305,7 @@ Add the dependency
                             android:layout_weight="10"
                             android:orientation="horizontal"
                             app:items="@{viewmodel.sexList}"
-                            app:checkedValue="@={viewmodel.sex}">
+                            app:selectedValue="@={viewmodel.sex}">
                             <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
                                 android:layout_width="wrap_content"
                                 app:value="@{viewmodel.sex_male}"
