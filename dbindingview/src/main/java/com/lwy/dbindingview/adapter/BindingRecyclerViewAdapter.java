@@ -19,6 +19,7 @@ import com.lwy.dbindingview.common.AdapterReferenceCollector;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+
 /**
  * A {@link RecyclerView.Adapter} that binds items to layouts using the given {@link ItemBinding}.
  * If you give it an {@link ObservableList} it will also updated itself based on changes to that

@@ -669,3 +669,22 @@ BindingCheckGroup同理
                        app:items="@{viewmodel.headerFooterItems}"
                        app:layoutManager="@{LayoutManagers.linear()}"/>
         ...
+# 参考<a id="sec-5" name="sec-5"></a>
+
+1.  [binding-collection-adapter](https://github.com/evant/binding-collection-adapter)
+
+# License<a id="sec-6" name="sec-6"></a>
+
+    Copyright 2018 lwy
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
