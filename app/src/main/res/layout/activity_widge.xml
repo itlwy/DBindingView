@@ -153,9 +153,17 @@
                         android:layout_marginRight="@dimen/margin_medium"
                         android:layout_weight="10"
                         android:orientation="horizontal"
-                        app:items="@{viewmodel.sexList}"
-                        app:childViewFactory="@{ViewFactory.createDBRadioButton()}"
-                        app:selectedValue="@={viewmodel.sex}"/>
+                        app:selectedValue="@={viewmodel.sex}">
+                        <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
+                            android:layout_width="wrap_content"
+                            app:value="@{viewmodel.sex_male}"
+                            android:layout_height="wrap_content"/>
+                        <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
+                            android:layout_width="wrap_content"
+                            app:value="@{viewmodel.sex_female}"
+                            android:layout_height="wrap_content"/>
+
+                    </com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup>
 
                 </LinearLayout>
 

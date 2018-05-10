@@ -9,8 +9,6 @@ import android.widget.RadioGroup;
 
 import com.lwy.dbindingview.data.KeyValue;
 
-import static com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup.isSame;
-
 
 /**
  * Created by lwy on 2017/11/3.
@@ -60,7 +58,7 @@ public class DataBindingRadioButton extends AppCompatRadioButton {
         if (parent instanceof DataBindingRadioGroup) {
             KeyValue checkedValue = ((DataBindingRadioGroup) parent).getSelectedValue();
             if (checkedValue != null) {
-                radioButton.setChecked(isSame(checkedValue.key, value.key));
+                radioButton.setChecked(checkedValue.equals(value));
             } else
                 radioButton.setChecked(false);
         }

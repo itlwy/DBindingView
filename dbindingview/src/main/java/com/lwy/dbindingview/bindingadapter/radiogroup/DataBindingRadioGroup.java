@@ -67,9 +67,9 @@ public class DataBindingRadioGroup extends RadioGroup {
 
     public void setSelectedValue(KeyValue selectedValue) {
         if (selectedValue != null && this.selectedValue != null) {
-            Integer inputKey = selectedValue.key;
-            Integer originKey = this.selectedValue.key;
-            if (isSame(originKey, inputKey)) {
+//            Integer inputKey = selectedValue.key;
+//            Integer originKey = this.selectedValue.key;
+            if (selectedValue.equals(this.selectedValue)) {
                 return;
             }
         }
@@ -83,13 +83,14 @@ public class DataBindingRadioGroup extends RadioGroup {
         } else {
             DataBindingRadioButton customRadioButton = findViewById(getCheckedRadioButtonId());
             Integer key = this.selectedValue.key;
-            if (customRadioButton == null || !isSame(key, customRadioButton.getValue().key)) {
+            if (customRadioButton == null || !this.selectedValue.equals(customRadioButton.getValue())) {
 
                 for (int i = 0; i < getChildCount(); i++) {
                     View child = getChildAt(i);
                     if (child instanceof DataBindingRadioButton) {
-                        Integer value = ((DataBindingRadioButton) child).getValue().key;
-                        if (isSame(this.selectedValue.key, value)) {
+                        KeyValue childKeyValue = ((DataBindingRadioButton) child).getValue();
+//                        Integer value = childKeyValue.key;
+                        if (this.selectedValue.equals(childKeyValue)) {
                             ((DataBindingRadioButton) child).setChecked(true);
                         }
                     }
@@ -114,7 +115,7 @@ public class DataBindingRadioGroup extends RadioGroup {
 //        void onValueChanged();
 //    }
 
-    @BindingAdapter(value = {"items", "childViewFactory"},requireAll = false)
+    @BindingAdapter(value = {"items", "childViewFactory"}, requireAll = false)
     public static void setItems(DataBindingRadioGroup radioGroup, List<KeyValue> items, DBCustomViewFactory<DataBindingRadioButton> factory) {
         if (items != null) {
             radioGroup.removeAllViews();
@@ -146,7 +147,7 @@ public class DataBindingRadioGroup extends RadioGroup {
         }
     }
 
-    static boolean isSame(Integer value1, Integer value2) {
-        return (value1 == null && value2 == null) || (value1 != null && value1.equals(value2));
-    }
+//    static boolean isSame(Integer value1, Integer value2) {
+//        return (value1 == null && value2 == null) || (value1 != null && value1.equals(value2));
+//    }
 }

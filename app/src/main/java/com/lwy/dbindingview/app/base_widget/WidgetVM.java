@@ -36,6 +36,8 @@ public class WidgetVM {
 
     public final ObservableArrayList<KeyValue> streetList = new ObservableArrayList<>();
     public final ObservableField<KeyValue> selectedStreet = new ObservableField<>();
+    public final KeyValue sex_male;
+    public final KeyValue sex_female;
 
     public JSONObject streetJson;
 
@@ -61,8 +63,8 @@ public class WidgetVM {
     public WidgetVM(IView view) {
 //        mView = new WeakReference<IView>(view);
         init();
-        KeyValue sex_male = new KeyValue(1, "男");
-        KeyValue sex_female = new KeyValue(0, "女");
+        sex_male = new KeyValue(1, "男");
+        sex_female = new KeyValue(0, "女");
         sexList.add(sex_male);
         sexList.add(sex_female);
 
