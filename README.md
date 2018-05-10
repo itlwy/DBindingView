@@ -1,5 +1,5 @@
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2>目录</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. 写在前面</a></li>
@@ -38,7 +38,8 @@ Android DataBinding介绍](https://blog.csdn.net/tianjf0514/article/details/7519
 
 # 缩略图<a id="sec-2" name="sec-2"></a>
 
-![normalWidget](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview.gif) ![recycleview](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview1.gif)
+![normalWidget](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview.gif)
+![recycleview](https://github.com/itlwy/DBindingView/blob/master/pic/dbindingview1.gif)
 
 # 如何引入<a id="sec-3" name="sec-3"></a>
 
@@ -58,7 +59,7 @@ Add the JitPack repository to your build file
 Add the dependency
 
     dependencies {
-                    compile 'com.github.itlwy:DBindingView:v1.0.9'
+                    compile 'com.github.itlwy:DBindingView:v1.1.0'
             }
 
 # 如何使用<a id="sec-4" name="sec-4"></a>
@@ -197,6 +198,15 @@ Add the dependency
 
 
 <tr>
+<td class="left">&#xa0;</td>
+<td class="left">childViewFactory</td>
+<td class="left">DBCustomViewFactory&lt;DataBindingRadioButton&gt;</td>
+<td class="left">&#xa0;</td>
+<td class="left">当设置了items属性时,可通过此属性传入继承自DataBindingRadioButton的自定义view,不设则用默认类</td>
+</tr>
+
+
+<tr>
 <td class="left">DataBindingRadioButton</td>
 <td class="left">value</td>
 <td class="left">KeyValue</td>
@@ -221,6 +231,15 @@ Add the dependency
 <td class="left">List&lt;KeyValue&gt;</td>
 <td class="left">&#xa0;</td>
 <td class="left">设置该属性可动态渲染子view</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">childViewFactory</td>
+<td class="left">DBCustomViewFactory&lt;BindingCheckBox&gt;</td>
+<td class="left">&#xa0;</td>
+<td class="left">当设置了items属性时,可通过此属性传入继承自BindingCheckBox的自定义view,不设则用默认类</td>
 </tr>
 </tbody>
 
@@ -293,6 +312,7 @@ Add the dependency
                           android:layout_weight="10"
                           android:orientation="horizontal"
                           app:items="@{viewmodel.sexList}"
+                          app:childViewFactory="@{ViewFactory.createDBRadioButton()}"
                           app:selectedValue="@={viewmodel.sex}"/>
 
 这里的app:items属性,让其根据sexList动态渲染子view(DataBindingRadioButton),也可以选择在布局里直接写子View，如：
@@ -671,7 +691,7 @@ BindingCheckGroup同理
         ...
 # 参考<a id="sec-5" name="sec-5"></a>
 
-1.  [binding-collection-adapter](https://github.com/evant/binding-collection-adapter)
+- [binding-collection-adapter](https://github.com/evant/binding-collection-adapter)
 
 # License<a id="sec-6" name="sec-6"></a>
 

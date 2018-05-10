@@ -7,6 +7,7 @@
     <data>
 
         <import type="com.lwy.dbindingview.R"/>
+        <import type="com.lwy.dbindingview.factory.ViewFactory"/>
 
         <variable
             name="viewmodel"
@@ -153,6 +154,7 @@
                         android:layout_weight="10"
                         android:orientation="horizontal"
                         app:items="@{viewmodel.sexList}"
+                        app:childViewFactory="@{ViewFactory.createDBRadioButton()}"
                         app:selectedValue="@={viewmodel.sex}"/>
 
                 </LinearLayout>

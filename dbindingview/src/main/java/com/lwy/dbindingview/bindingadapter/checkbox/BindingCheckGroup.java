@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.lwy.dbindingview.data.KeyValue;
+import com.lwy.dbindingview.factory.DBCustomViewFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,14 +62,18 @@ public class BindingCheckGroup extends LinearLayout {
     }
 
 
-    @BindingAdapter("items")
-    public static void setItems(BindingCheckGroup view, List<KeyValue> dataSources) {
+    @BindingAdapter(value = {"items", "childViewFactory"}, requireAll = false)
+    public static void setItems(BindingCheckGroup view, List<KeyValue> dataSources, DBCustomViewFactory<BindingCheckBox> factory) {
         view.dataSources = dataSources;
         if (dataSources != null) {
             view.removeAllViews();
             LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             for (KeyValue dataSource : dataSources) {
-                BindingCheckBox cb = new BindingCheckBox(view.getContext());
+                BindingCheckBox cb;
+                if (factory != null)
+                    cb = factory.create(view.getContext());
+                else
+                    cb = new BindingCheckBox(view.getContext());
                 cb.setLayoutParams(params);
                 cb.setValue(dataSource);
                 view.addView(cb);

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
 import com.lwy.dbindingview.data.KeyValue;
+import com.lwy.dbindingview.factory.DBCustomViewFactory;
 import com.lwy.dbindingview.utils.DensityUtil;
 
 import java.util.List;
@@ -113,15 +114,19 @@ public class DataBindingRadioGroup extends RadioGroup {
 //        void onValueChanged();
 //    }
 
-    @BindingAdapter("items")
-    public static void setItems(DataBindingRadioGroup radioGroup, List<KeyValue> items) {
+    @BindingAdapter(value = {"items", "childViewFactory"},requireAll = false)
+    public static void setItems(DataBindingRadioGroup radioGroup, List<KeyValue> items, DBCustomViewFactory<DataBindingRadioButton> factory) {
         if (items != null) {
             radioGroup.removeAllViews();
             if (items.size() > 0) {
                 LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 params.rightMargin = DensityUtil.dip2px(radioGroup.getContext(), 10);
+                DataBindingRadioButton rb;
                 for (KeyValue item : items) {
-                    DataBindingRadioButton rb = new DataBindingRadioButton(radioGroup.getContext());
+                    if (factory != null)
+                        rb = factory.create(radioGroup.getContext());
+                    else
+                        rb = new DataBindingRadioButton(radioGroup.getContext());
                     rb.setLayoutParams(params);
                     radioGroup.addView(rb);
                     DataBindingRadioButton.setValue(rb, item);
