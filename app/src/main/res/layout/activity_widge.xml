@@ -2,16 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="com.lwy.dbindingview.base_widget.WidgeActivity">
+        tools:context="com.lwy.dbindingview.app.base_widget.WidgeActivity">
 
     <data>
 
-        <import type="com.lwy.dbindingview.R"/>
+        <import type="com.lwy.dbindingview.app.R"/>
         <import type="com.lwy.dbindingview.factory.ViewFactory"/>
 
         <variable
             name="viewmodel"
-            type="com.lwy.dbindingview.base_widget.WidgetVM"/>
+            type="com.lwy.dbindingview.app.base_widget.WidgetVM"/>
     </data>
 
     <LinearLayout

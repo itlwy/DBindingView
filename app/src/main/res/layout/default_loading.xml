@@ -6,7 +6,7 @@
 
         <variable
             name="footerVM"
-            type="com.lwy.dbindingview.recycleview.vm.FooterVM"/>
+            type="com.lwy.dbindingview.app.recycleview.vm.FooterVM"/>
     </data>
 
     <LinearLayout

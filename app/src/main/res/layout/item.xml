@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.lwy.dbindingview.recycleview.vm.ItemVM" />
+            type="com.lwy.dbindingview.app.recycleview.vm.ItemVM" />
 
         <import type="android.view.View" />
     </data>

@@ -1,4 +1,4 @@
-package com.lwy.dbindingview.base_widget;
+package com.lwy.dbindingview.app.base_widget;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
-import com.lwy.dbindingview.R;
-import com.lwy.dbindingview.base.IView;
-import com.lwy.dbindingview.databinding.ActivityWidgeBinding;
+import com.lwy.dbindingview.app.R;
+import com.lwy.dbindingview.app.databinding.ActivityWidgeBinding;
+import com.lwy.dbindingview.app.base.IView;
 
 public class WidgeActivity extends AppCompatActivity implements IView {
 

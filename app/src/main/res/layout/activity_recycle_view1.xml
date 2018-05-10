@@ -7,11 +7,11 @@
 
         <variable
             name="viewmodel"
-            type="com.lwy.dbindingview.recycleview.vm.RcvVM"/>
+            type="com.lwy.dbindingview.app.recycleview.vm.RcvVM"/>
 
         <variable
             name="listeners"
-            type="com.lwy.dbindingview.recycleview.Listeners"/>
+            type="com.lwy.dbindingview.app.recycleview.Listeners"/>
 
         <import type="com.lwy.dbindingview.LayoutManagers"/>
     </data>

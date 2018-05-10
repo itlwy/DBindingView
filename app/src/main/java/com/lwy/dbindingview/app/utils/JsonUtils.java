@@ -1,4 +1,4 @@
-package com.lwy.dbindingview.utils;
+package com.lwy.dbindingview.app.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;

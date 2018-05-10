@@ -1,4 +1,4 @@
-package com.lwy.dbindingview.recycleview;
+package com.lwy.dbindingview.app.recycleview;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.LayoutRes;

@@ -1,12 +1,12 @@
-package com.lwy.dbindingview;
+package com.lwy.dbindingview.app;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.lwy.dbindingview.base.IView;
-import com.lwy.dbindingview.databinding.ActivityMainBinding;
+import com.lwy.dbindingview.app.databinding.ActivityMainBinding;
+import com.lwy.dbindingview.app.base.IView;
 
 
 public class MainActivity extends AppCompatActivity implements IView {

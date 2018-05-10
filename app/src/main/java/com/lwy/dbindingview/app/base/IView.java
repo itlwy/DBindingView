@@ -1,4 +1,4 @@
-package com.lwy.dbindingview.base;
+package com.lwy.dbindingview.app.base;
 
 import android.content.Context;
 

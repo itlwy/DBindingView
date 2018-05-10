@@ -1,4 +1,4 @@
-package com.lwy.dbindingview.recycleview.vm;
+package com.lwy.dbindingview.app.recycleview.vm;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
@@ -9,15 +9,15 @@ import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.lwy.dbindingview.BR;
+import com.lwy.dbindingview.app.BR;
 import com.lwy.dbindingview.ItemBinding;
-import com.lwy.dbindingview.R;
+import com.lwy.dbindingview.app.R;
 import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
 import com.lwy.dbindingview.collections.MergeObservableList;
 import com.lwy.dbindingview.command.ReplyCommand;
 import com.lwy.dbindingview.command.functions.Action0;
 import com.lwy.dbindingview.itembindings.OnItemBindClass;
-import com.lwy.dbindingview.recycleview.LoggingRecyclerViewAdapter;
+import com.lwy.dbindingview.app.recycleview.LoggingRecyclerViewAdapter;
 
 public class RcvVM {
     private boolean checkable;  // for now,it's useless
@@ -127,8 +127,8 @@ public class RcvVM {
      */
     public final ItemBinding<Object> multipleItems = ItemBinding.of(new OnItemBindClass<>()
             .map(FooterVM.class, BR.footerVM, R.layout.default_loading)
-            .map(String.class, com.lwy.dbindingview.BR.item, R.layout.item_header_footer)
-            .map(ItemVM.class, com.lwy.dbindingview.BR.item, R.layout.item));
+            .map(String.class, BR.item, R.layout.item_header_footer)
+            .map(ItemVM.class, BR.item, R.layout.item));
 
 
     /**

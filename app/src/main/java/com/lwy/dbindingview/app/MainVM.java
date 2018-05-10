@@ -1,11 +1,11 @@
-package com.lwy.dbindingview;
+package com.lwy.dbindingview.app;
 
 import android.content.Context;
 import android.content.Intent;
 
-import com.lwy.dbindingview.base.IView;
-import com.lwy.dbindingview.base_widget.WidgeActivity;
-import com.lwy.dbindingview.recycleview.RecycleViewActivity1;
+import com.lwy.dbindingview.app.base.IView;
+import com.lwy.dbindingview.app.base_widget.WidgeActivity;
+import com.lwy.dbindingview.app.recycleview.RecycleViewActivity1;
 
 import java.lang.ref.WeakReference;
 

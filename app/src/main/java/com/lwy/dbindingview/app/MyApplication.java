@@ -1,4 +1,4 @@
-package com.lwy.dbindingview;
+package com.lwy.dbindingview.app;
 
 import android.app.Application;
 

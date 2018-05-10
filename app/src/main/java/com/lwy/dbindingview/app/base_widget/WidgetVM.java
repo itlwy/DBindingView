@@ -1,4 +1,4 @@
-package com.lwy.dbindingview.base_widget;
+package com.lwy.dbindingview.app.base_widget;
 
 import android.databinding.Observable;
 import android.databinding.ObservableArrayList;
@@ -6,12 +6,12 @@ import android.databinding.ObservableField;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.lwy.dbindingview.MyApplication;
-import com.lwy.dbindingview.base.IView;
+import com.lwy.dbindingview.app.MyApplication;
+import com.lwy.dbindingview.app.base.IView;
 import com.lwy.dbindingview.command.ReplyCommand;
 import com.lwy.dbindingview.command.functions.Action0;
 import com.lwy.dbindingview.data.KeyValue;
-import com.lwy.dbindingview.utils.JsonUtils;
+import com.lwy.dbindingview.app.utils.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;

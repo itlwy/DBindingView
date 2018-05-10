@@ -1,4 +1,4 @@
-package com.lwy.dbindingview.recycleview.vm;
+package com.lwy.dbindingview.app.recycleview.vm;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

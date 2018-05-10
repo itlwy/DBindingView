@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="com.lwy.dbindingview.MainActivity">
+        tools:context="com.lwy.dbindingview.app.MainActivity">
 
     <data>
 
         <variable
             name="viewmodel"
-            type="com.lwy.dbindingview.MainVM"/>
+            type="com.lwy.dbindingview.app.MainVM"/>
     </data>
 
     <LinearLayout

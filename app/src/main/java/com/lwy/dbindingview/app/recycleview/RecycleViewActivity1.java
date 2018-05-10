@@ -1,12 +1,12 @@
-package com.lwy.dbindingview.recycleview;
+package com.lwy.dbindingview.app.recycleview;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.lwy.dbindingview.R;
-import com.lwy.dbindingview.databinding.ActivityRecycleView1Binding;
-import com.lwy.dbindingview.recycleview.vm.RcvVM;
+import com.lwy.dbindingview.app.R;
+import com.lwy.dbindingview.app.databinding.ActivityRecycleView1Binding;
+import com.lwy.dbindingview.app.recycleview.vm.RcvVM;
 
 public class RecycleViewActivity1 extends AppCompatActivity {
 

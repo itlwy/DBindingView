@@ -1,6 +1,6 @@
-package com.lwy.dbindingview.recycleview;
+package com.lwy.dbindingview.app.recycleview;
 
-import com.lwy.dbindingview.recycleview.vm.RcvVM;
+import com.lwy.dbindingview.app.recycleview.vm.RcvVM;
 
 public class Listeners {
     private RcvVM viewModel;
