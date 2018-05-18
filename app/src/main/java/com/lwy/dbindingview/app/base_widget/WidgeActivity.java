@@ -25,6 +25,7 @@ public class WidgeActivity extends AppCompatActivity implements IView {
     }
 
 
+
     @Override
     public Context getContext() {
         return this;

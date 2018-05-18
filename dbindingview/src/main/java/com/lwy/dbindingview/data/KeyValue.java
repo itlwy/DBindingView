@@ -36,7 +36,7 @@ public final class KeyValue implements Serializable {
         if (!(obj instanceof KeyValue))
             return false;
         KeyValue kv2 = (KeyValue) obj;
-        if (this.key == kv2.key && this.value.equals(kv2.value))
+        if (this.key.equals(kv2.key) && this.value.equals(kv2.value))
             return true;
         else
             return false;
