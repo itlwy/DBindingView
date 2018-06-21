@@ -114,26 +114,23 @@ public class BindingSpinner extends AppCompatSpinner {
     }
 
     private static void initAdapter(BindingSpinner spinner, List<KeyValue> items, KeyValue selectedValue) {
-        if (spinner.getAdapter() == null) {
-            BindingArrayAdapter adapter = new BindingArrayAdapter(spinner.getContext(), android.R.layout.simple_spinner_item,
+        BindingArrayAdapter arrayAdapter = (BindingArrayAdapter) spinner.getAdapter();
+        if (arrayAdapter == null) {
+            arrayAdapter = new BindingArrayAdapter(spinner.getContext(), android.R.layout.simple_spinner_item,
                     items);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
-            setSelection(spinner, selectedValue);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(arrayAdapter);
         } else {
-            BindingArrayAdapter arrayAdapter = (BindingArrayAdapter) spinner.getAdapter();
             arrayAdapter.clear();
             arrayAdapter.addAll(items);
-//                spinner.setSelection(0);
-//            arrayAdapter.notifyDataSetChanged();
+        }
+        if (!setSelection(spinner, selectedValue)) {
             selectedValue = arrayAdapter.getObjects().get(0);
             spinner.selectedValue = selectedValue;
             if (spinner.listener != null) {
                 spinner.listener.onChange();
             }
         }
-        setSelection(spinner, selectedValue);
-
     }
 
     private static boolean diff(List<KeyValue> items, List<KeyValue> items1) {
