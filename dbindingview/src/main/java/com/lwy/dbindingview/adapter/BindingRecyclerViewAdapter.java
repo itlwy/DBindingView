@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.lwy.dbindingview.ItemBinding;
 import com.lwy.dbindingview.Utils;
 import com.lwy.dbindingview.common.AdapterReferenceCollector;
+import com.lwy.dbindingview.data.RcVFooterVM;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -86,6 +87,14 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
     public void onBindBinding(ViewDataBinding binding, int variableId, @LayoutRes int layoutRes, int position, T item) {
         if (itemBinding.bind(binding, item)) {
             binding.executePendingBindings();
+            Class<RcVFooterVM> key = RcVFooterVM.class;
+            if (key.isInstance(item)) {
+                RcVFooterVM footerVM = (RcVFooterVM) item;
+                if (footerVM.getOnLoadMoreCommand() != null && !footerVM.getIsFooterLoading().get()) {
+                    footerVM.switchLoading(true);
+                    footerVM.getOnLoadMoreCommand().execute(recyclerView.getAdapter().getItemCount());
+                }
+            }
         }
     }
 
@@ -139,6 +148,7 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
      * Constructs a view holder for the given databinding. The default implementation is to use
      * {@link ViewHolderFactory} if provided, otherwise use a default view holder.
      */
+
     public ViewHolder onCreateViewHolder(ViewDataBinding binding) {
         if (viewHolderFactory != null) {
             return viewHolderFactory.createViewHolder(binding);
