@@ -112,14 +112,16 @@ public class ViewBindingAdapter {
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            int visibleItemCount = layoutManager.getChildCount();
-            int totalItemCount = layoutManager.getItemCount();
-            int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
-            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                if (this.RcVFooterVM.getOnLoadMoreCommand() != null && !this.RcVFooterVM.getIsFooterLoading().get()) {
-                    this.RcVFooterVM.switchLoading(true);
-                    this.RcVFooterVM.getOnLoadMoreCommand().execute(recyclerView.getAdapter().getItemCount());
+            if (dy > 0) {
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+                if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    if (this.RcVFooterVM.getOnLoadMoreCommand() != null && !this.RcVFooterVM.getIsFooterLoading().get()) {
+                        this.RcVFooterVM.switchLoading(true);
+                        this.RcVFooterVM.getOnLoadMoreCommand().execute(recyclerView.getAdapter().getItemCount());
+                    }
                 }
             }
         }
