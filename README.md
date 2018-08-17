@@ -684,7 +684,6 @@ BindingCheckGroup同理
                        android:id="@+id/list"
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
-                       app:footerVM="@{viewmodel.footerVM}"
                        app:itemBinding="@{viewmodel.multipleItems}"
                        app:items="@{viewmodel.headerFooterItems}"
                        app:layoutManager="@{LayoutManagers.linear()}"/>

@@ -9,15 +9,15 @@ import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.lwy.dbindingview.app.BR;
 import com.lwy.dbindingview.ItemBinding;
-import com.lwy.dbindingview.app.R;
 import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
+import com.lwy.dbindingview.app.BR;
+import com.lwy.dbindingview.app.R;
+import com.lwy.dbindingview.app.recycleview.LoggingRecyclerViewAdapter;
 import com.lwy.dbindingview.collections.MergeObservableList;
 import com.lwy.dbindingview.command.ReplyCommand;
 import com.lwy.dbindingview.command.functions.Action0;
 import com.lwy.dbindingview.itembindings.OnItemBindClass;
-import com.lwy.dbindingview.app.recycleview.LoggingRecyclerViewAdapter;
 
 public class RcvVM {
     private boolean checkable;  // for now,it's useless
@@ -68,9 +68,9 @@ public class RcvVM {
                 @Override
                 protected void onPostExecute(Integer integer) {
                     footerVM.switchLoading(false);
-                    if (items.size() > 7)
+                    if (items.size() > 20)
                         return;
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < 15; i++) {
                         addItem();
                     }
                     super.onPostExecute(integer);
@@ -95,7 +95,7 @@ public class RcvVM {
     public final LoggingRecyclerViewAdapter<Object> adapter = new LoggingRecyclerViewAdapter<>();
 
     public RcvVM() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 15; i++) {
             items.add(new ItemVM(i, checkable));
         }
     }

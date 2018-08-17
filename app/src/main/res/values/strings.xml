@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DBindingView使用</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>

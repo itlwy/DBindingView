@@ -8,15 +8,16 @@ import android.widget.Toast;
 
 import com.lwy.dbindingview.app.MyApplication;
 import com.lwy.dbindingview.app.base.IView;
+import com.lwy.dbindingview.app.utils.JsonUtils;
 import com.lwy.dbindingview.command.ReplyCommand;
 import com.lwy.dbindingview.command.functions.Action0;
 import com.lwy.dbindingview.data.KeyValue;
-import com.lwy.dbindingview.app.utils.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +39,7 @@ public class WidgetVM {
     public final ObservableField<KeyValue> selectedStreet = new ObservableField<>();
     public final KeyValue sex_male;
     public final KeyValue sex_female;
+    private final WeakReference<IView> mView;
 
     public JSONObject streetJson;
 
@@ -55,13 +57,14 @@ public class WidgetVM {
     public ReplyCommand checkCommand = new ReplyCommand(new Action0() {
         @Override
         public void call() {
+
             Toast.makeText(MyApplication.getMyApplication(), "点击了查看", Toast.LENGTH_SHORT).show();
         }
     });
 
 
     public WidgetVM(IView view) {
-//        mView = new WeakReference<IView>(view);
+        mView = new WeakReference<IView>(view);
         init();
         sex_male = new KeyValue(1, "男");
         sex_female = new KeyValue(0, "女");

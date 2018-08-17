@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.lwy.dbindingview.app.R;
-import com.lwy.dbindingview.app.databinding.ActivityWidgeBinding;
 import com.lwy.dbindingview.app.base.IView;
+import com.lwy.dbindingview.app.databinding.ActivityWidgeBinding;
 
 public class WidgeActivity extends AppCompatActivity implements IView {
 
@@ -21,7 +21,6 @@ public class WidgeActivity extends AppCompatActivity implements IView {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_widge);
         mBinding.setViewmodel(new WidgetVM(this));
-
     }
 
 
