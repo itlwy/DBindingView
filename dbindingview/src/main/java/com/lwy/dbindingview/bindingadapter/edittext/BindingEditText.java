@@ -7,10 +7,12 @@ import android.databinding.InverseBindingMethod;
 import android.databinding.InverseBindingMethods;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+
+import static android.text.InputType.TYPE_CLASS_NUMBER;
+import static android.text.InputType.TYPE_NUMBER_FLAG_SIGNED;
 
 /**
  * Created by lwy on 2018/8/22.
@@ -40,21 +42,22 @@ public class BindingEditText extends AppCompatEditText {
         else
             text = textInt.toString();
         String curStr = bindingEditText.getText().toString();
-        if (!curStr.equals(text))
+//        对"-"的判断主要是为了做负数的输入做兼容
+        if (!"-".equals(curStr) && !curStr.equals(text))
             bindingEditText.setText(text);
     }
 
     public Integer getTextInt() {
         Integer retInt = null;
         String text = getText().toString();
-        if (!TextUtils.isEmpty(text))
+        if (!"-".equals(text) && !TextUtils.isEmpty(text))
             retInt = Integer.parseInt(text);
         return retInt;
     }
 
     @BindingAdapter("textIntAttrChanged")
     public static void setValueChangedListener(BindingEditText bindingEditText, InverseBindingListener inverseBindingListener) {
-        bindingEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        bindingEditText.setInputType(TYPE_CLASS_NUMBER | TYPE_NUMBER_FLAG_SIGNED);
         bindingEditText.addTextChangedListener(new CustomTextWatcher(bindingEditText, inverseBindingListener));
     }
 
@@ -81,8 +84,10 @@ public class BindingEditText extends AppCompatEditText {
         public void afterTextChanged(Editable s) {
             String text = s.toString();
             try {
-                if (!TextUtils.isEmpty(text)) {
-                    Integer.parseInt(text);
+                if (!"-".equals(text)) {
+                    if (!TextUtils.isEmpty(text)) {
+                        Integer.parseInt(text);
+                    }
                 }
                 if (this.inverseBindingListener != null) {
                     this.inverseBindingListener.onChange();
