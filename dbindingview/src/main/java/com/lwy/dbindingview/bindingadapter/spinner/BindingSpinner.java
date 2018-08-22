@@ -17,8 +17,7 @@ import java.util.List;
 
 
 @InverseBindingMethods({
-        @InverseBindingMethod(
-                type = BindingSpinner.class,
+        @InverseBindingMethod(type = BindingSpinner.class,
                 attribute = "selectedValue",
                 event = "selectedValueAttrChanged",
                 method = "getSelectedValue")
