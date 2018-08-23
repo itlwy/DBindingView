@@ -91,12 +91,10 @@ public class BindingEditText extends AppCompatEditText {
         String curStr = bindingEditText.getText().toString();
         String temp = curStr + ".0";
         // temp.equals(temp) -> eg: 文本框为6 返回的Double为6.0  排除这种情况
-//        if (!TextUtils.isEmpty(curStr) && (curStr.endsWith(".") || text.equals(temp)))
-//            return;
-//        对"-"的判断主要是为了做负数的输入做兼容
         if (curStr.endsWith(".") || curStr.startsWith(".") || text.equals(temp)) {
             return;
         }
+        //        对"-"的判断主要是为了做负数的输入做兼容
         if (!"-".equals(curStr) && !curStr.equals(text))
             bindingEditText.setText(text);
     }
@@ -180,7 +178,6 @@ public class BindingEditText extends AppCompatEditText {
                 if (this.inverseBindingListener != null) {
                     this.inverseBindingListener.onChange();
                 }
-//                bindingEditText.setSelection(bindingEditText.getEditableText().toString().length());
             } else {
                 String newStr = text.substring(0, text.length() - 1);
                 bindingEditText.setText(newStr);

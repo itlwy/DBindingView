@@ -7,6 +7,7 @@
     <data>
 
         <import type="com.lwy.dbindingview.app.R"/>
+
         <import type="com.lwy.dbindingview.factory.ViewFactory"/>
 
         <variable
@@ -26,7 +27,7 @@
             android:layout_weight="0"
             android:gravity="center"
             android:padding="@dimen/padding_medium"
-            android:text="@{String.format(`地址:%s\r\n辖区:%s\r\n街道:%s\r\n性别:%s\r\n爱好数:%s`,viewmodel.address.get(),viewmodel.selectedArea.get().value,viewmodel.selectedStreet.get().value,viewmodel.sex.value,viewmodel.hobby.size())}"
+            android:text="@{String.format(`地址:%s\r\n辖区:%s\r\n街道:%s\r\n性别:%s\r\n爱好数:%s\r\n数值:%s`,viewmodel.address.get(),viewmodel.selectedArea.get().value,viewmodel.selectedStreet.get().value,viewmodel.sex.value,viewmodel.hobby.size(),viewmodel.number.get())}"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_title"
             tools:text="地址:%s,辖区:%s,街道:%s"/>
@@ -58,7 +59,7 @@
                         android:text="地址:"
                         android:textSize="@dimen/text_item"/>
 
-                    <EditText
+                    <com.lwy.dbindingview.bindingadapter.edittext.BindingEditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_medium"
@@ -68,6 +69,35 @@
                         android:padding="@dimen/padding_small"
                         android:text="@={viewmodel.address}"
                         android:textSize="@dimen/text_item"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_small">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_weight="4"
+                        android:padding="@dimen/padding_small"
+                        android:text="数值:"
+                        android:textSize="@dimen/text_item"/>
+
+                    <com.lwy.dbindingview.bindingadapter.edittext.BindingEditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_marginRight="@dimen/margin_medium"
+                        android:layout_weight="10"
+                        android:background="@drawable/shape_round_edit"
+                        android:padding="@dimen/padding_small"
+                        android:textSize="@dimen/text_item"
+                        app:textDouble="@={viewmodel.number}"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -154,14 +184,16 @@
                         android:layout_weight="10"
                         android:orientation="horizontal"
                         app:selectedValue="@={viewmodel.sex}">
+
                         <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
                             android:layout_width="wrap_content"
-                            app:value="@{viewmodel.sex_male}"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            app:value="@{viewmodel.sex_male}"/>
+
                         <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
                             android:layout_width="wrap_content"
-                            app:value="@{viewmodel.sex_female}"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            app:value="@{viewmodel.sex_female}"/>
 
                     </com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioGroup>
 

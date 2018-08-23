@@ -29,6 +29,7 @@ public class RcvVM {
 
     public class ViewStyle {
         public final ObservableField<Boolean> isRefreshing = new ObservableField<>();
+
     }
 
 

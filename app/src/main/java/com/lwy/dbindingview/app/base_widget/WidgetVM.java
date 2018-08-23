@@ -31,6 +31,7 @@ public class WidgetVM {
 //    private WeakReference<IView> mView;
 
     public final ObservableField<String> address = new ObservableField<>();
+    public final ObservableField<Double> number = new ObservableField<>();
 
     public final ObservableArrayList<KeyValue> areaList = new ObservableArrayList<>();
     public final ObservableField<KeyValue> selectedArea = new ObservableField<>();
@@ -57,7 +58,6 @@ public class WidgetVM {
     public ReplyCommand checkCommand = new ReplyCommand(new Action0() {
         @Override
         public void call() {
-
             Toast.makeText(MyApplication.getMyApplication(), "点击了查看", Toast.LENGTH_SHORT).show();
         }
     });
