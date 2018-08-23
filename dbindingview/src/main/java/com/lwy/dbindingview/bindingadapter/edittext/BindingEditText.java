@@ -11,6 +11,8 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 
+import java.text.DecimalFormat;
+
 import static android.text.InputType.TYPE_CLASS_NUMBER;
 import static android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL;
 import static android.text.InputType.TYPE_NUMBER_FLAG_SIGNED;
@@ -26,6 +28,9 @@ import static android.text.InputType.TYPE_NUMBER_FLAG_SIGNED;
         @InverseBindingMethod(type = BindingEditText.class, attribute = "textDouble", method = "getTextDouble")
 })
 public class BindingEditText extends AppCompatEditText {
+
+    private String pattern = "######.####";
+    private DecimalFormat mDecimalFormat = new DecimalFormat(pattern);
 
     public BindingEditText(Context context) {
         super(context);
@@ -44,6 +49,32 @@ public class BindingEditText extends AppCompatEditText {
             return true;
         else
             return false;
+    }
+
+    private static void initTextNumber(BindingEditText bindingEditText, Object textObj) {
+        String text;
+        String curStr = bindingEditText.getText().toString();
+        //        对"-"的判断主要是为了做负数的输入做兼容
+        if ("-".equals(curStr) || ".".equals(curStr))
+            return;
+
+        if (textObj == null)
+            text = "";
+        else {
+            text = bindingEditText.mDecimalFormat.format(textObj);
+        }
+
+        String temp = curStr + ".0";
+        // temp.equals(temp) -> eg: 文本框为6 返回的Double为6.0  排除这种情况
+        if (curStr.endsWith(".") || curStr.startsWith(".") || text.equals(temp)) {
+            return;
+        }
+
+        if (!curStr.equals(text)) {
+            bindingEditText.setText(text);
+            bindingEditText.setSelection(text.length());
+        }
+
     }
 
     public Integer getTextInt() {
@@ -82,21 +113,10 @@ public class BindingEditText extends AppCompatEditText {
         return retFloat;
     }
 
-    private static void initTextNumber(BindingEditText bindingEditText, Object textObj) {
-        String text;
-        if (textObj == null)
-            text = "";
-        else
-            text = textObj.toString();
-        String curStr = bindingEditText.getText().toString();
-        String temp = curStr + ".0";
-        // temp.equals(temp) -> eg: 文本框为6 返回的Double为6.0  排除这种情况
-        if (curStr.endsWith(".") || curStr.startsWith(".") || text.equals(temp)) {
-            return;
-        }
-        //        对"-"的判断主要是为了做负数的输入做兼容
-        if (!"-".equals(curStr) && !curStr.equals(text))
-            bindingEditText.setText(text);
+    @BindingAdapter("numberFormat")
+    public static void initNumberFormat(BindingEditText bindingEditText, String format) {
+        bindingEditText.pattern = format;
+        bindingEditText.mDecimalFormat = new DecimalFormat(format);
     }
 
     @BindingAdapter("textInt")
@@ -133,13 +153,13 @@ public class BindingEditText extends AppCompatEditText {
 
     @BindingAdapter("textDoubleAttrChanged")
     public static void setDoubleValueChangedListener(BindingEditText bindingEditText, final InverseBindingListener inverseBindingListener) {
-        bindingEditText.setInputType(TYPE_CLASS_NUMBER | TYPE_NUMBER_FLAG_DECIMAL);
+        bindingEditText.setInputType(TYPE_CLASS_NUMBER | TYPE_NUMBER_FLAG_DECIMAL | TYPE_NUMBER_FLAG_SIGNED);
         bindingEditText.addTextChangedListener(new CustomTextWatcher(bindingEditText, inverseBindingListener, new DoubleJudgeStrategy()));
     }
 
     @BindingAdapter("textFloatAttrChanged")
     public static void setFloatValueChangedListener(BindingEditText bindingEditText, InverseBindingListener inverseBindingListener) {
-        bindingEditText.setInputType(TYPE_CLASS_NUMBER | TYPE_NUMBER_FLAG_DECIMAL);
+        bindingEditText.setInputType(TYPE_CLASS_NUMBER | TYPE_NUMBER_FLAG_DECIMAL | TYPE_NUMBER_FLAG_SIGNED);
         bindingEditText.addTextChangedListener(new CustomTextWatcher(bindingEditText, inverseBindingListener, new FloatJudgeStrategy()));
     }
 
@@ -174,15 +194,29 @@ public class BindingEditText extends AppCompatEditText {
                 }
                 return;
             }
+            int strDotIndex = text.indexOf(".");
+            int patternDotIndex = bindingEditText.pattern.indexOf(".");
+            if (strDotIndex > -1 && patternDotIndex > -1) {
+                int maxDotLength = bindingEditText.pattern.length() - 1 - patternDotIndex;
+                int strDotLength = text.length() - 1 - strDotIndex;
+                if (strDotLength > maxDotLength) {
+                    rollString(text);
+                    return;
+                }
+            }
             if (numberJudgeStrategy.isMatch(text)) {
                 if (this.inverseBindingListener != null) {
                     this.inverseBindingListener.onChange();
                 }
             } else {
-                String newStr = text.substring(0, text.length() - 1);
-                bindingEditText.setText(newStr);
-                bindingEditText.setSelection(newStr.length());
+                rollString(text);
             }
+        }
+
+        private void rollString(String text) {
+            String newStr = text.substring(0, text.length() - 1);
+            bindingEditText.setText(newStr);
+            bindingEditText.setSelection(newStr.length());
         }
     }
 
@@ -219,8 +253,11 @@ public class BindingEditText extends AppCompatEditText {
         public boolean isMatch(String text) {
             boolean flag = false;
             try {
-                Float.parseFloat(text);
-                flag = true;
+                Float f = Float.parseFloat(text);
+                if (f.isInfinite() || f.isNaN()) {
+                    flag = false;
+                } else
+                    flag = true;
             } catch (NumberFormatException e) {
 
             }
@@ -233,8 +270,11 @@ public class BindingEditText extends AppCompatEditText {
         public boolean isMatch(String text) {
             boolean flag = false;
             try {
-                Double.parseDouble(text);
-                flag = true;
+                Double d = Double.parseDouble(text);
+                if (d.isInfinite() || d.isNaN()) {
+                    flag = false;
+                } else
+                    flag = true;
             } catch (NumberFormatException e) {
 
             }

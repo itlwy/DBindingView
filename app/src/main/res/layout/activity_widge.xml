@@ -97,7 +97,9 @@
                         android:background="@drawable/shape_round_edit"
                         android:padding="@dimen/padding_small"
                         android:textSize="@dimen/text_item"
-                        app:textDouble="@={viewmodel.number}"/>
+                        app:regularExpression="@{`^[0-9]*`}"
+                        app:textDouble="@={viewmodel.number}"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
