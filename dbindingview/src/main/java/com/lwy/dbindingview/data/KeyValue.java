@@ -41,4 +41,9 @@ public final class KeyValue implements Serializable {
         else
             return false;
     }
+
+    @Override
+    public int hashCode() {
+        return key.hashCode() + value.hashCode();
+    }
 }

@@ -116,7 +116,6 @@ public class BindingCheckGroup extends LinearLayout {
 
     public void notifyValuesChange(int checkBoxID, KeyValue checkedValue, boolean ischeck) {
         if (ischeck) {
-            // TODO: 2017/11/6 换成不允许重复的集合
             if (!viewSelectedValues.contains(checkedValue)) {
                 viewSelectedValues.add(checkedValue);
                 sourcesSelectedValues.add(checkedValue);

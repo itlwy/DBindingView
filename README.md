@@ -1,5 +1,5 @@
 <div id="table-of-contents">
-<h2>目录</h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. 写在前面</a></li>
@@ -26,6 +26,8 @@
 </li>
 </ul>
 </li>
+<li><a href="#sec-5">5. 参考</a></li>
+<li><a href="#sec-6">6. License</a></li>
 </ul>
 </div>
 </div>
@@ -59,7 +61,7 @@ Add the JitPack repository to your build file
 Add the dependency
 
     dependencies {
-                    compile 'com.github.itlwy:DBindingView:v1.1.1'
+                    compile 'com.github.itlwy:DBindingView:v1.1.14'
             }
 
 # 如何使用<a id="sec-4" name="sec-4"></a>
@@ -129,6 +131,13 @@ Add the dependency
 <td class="left">BindingCheckBox</td>
 <td class="left">com.lwy.dbindingview.bindingadapter.checkbox</td>
 <td class="left">封装的双向绑定自定义CheckBox</td>
+</tr>
+
+
+<tr>
+<td class="left">BindingEditText</td>
+<td class="left">com.lwy.dbindingview.bindingadapter.edittext.BindingEditText</td>
+<td class="left">让EditText支持绑定数值类型,eg:Integer、Double&#x2026;</td>
 </tr>
 </tbody>
 </table>
@@ -298,6 +307,25 @@ Add the dependency
 <td class="left">控制view的Visibility</td>
 </tr>
 </tbody>
+
+<tbody>
+<tr>
+<td class="left">BindingEdittext</td>
+<td class="left">textDouble、textInt、textFloat、textLong</td>
+<td class="left">Double、Float、Integer、Long</td>
+<td class="left">&#xa0;</td>
+<td class="left">绑定数值类型</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">regularExpression</td>
+<td class="left">&#xa0;</td>
+<td class="left"></td>
+<td class="left">正则表达式校验输入值&#xa0;</td>
+</tr>
+</tbody>
 </table>
 
 具体使用很简单,直接看demo&#x2013;>com.lwy.dbindingview.base_widget.WidgeActivity
@@ -324,7 +352,6 @@ Add the dependency
                             android:layout_marginRight="@dimen/margin_medium"
                             android:layout_weight="10"
                             android:orientation="horizontal"
-                            app:items="@{viewmodel.sexList}"
                             app:selectedValue="@={viewmodel.sex}">
                             <com.lwy.dbindingview.bindingadapter.radiogroup.DataBindingRadioButton
                                 android:layout_width="wrap_content"
@@ -419,14 +446,6 @@ BindingCheckGroup同理
 <td class="left">LayoutManagers.LayoutManagerFactory</td>
 <td class="left">&#xa0;</td>
 <td class="left">必填,布局方式,如线性:LayoutManagers.linear()</td>
-</tr>
-
-
-<tr>
-<td class="left">footerVM</td>
-<td class="left">RcVFooterVM</td>
-<td class="left">&#xa0;</td>
-<td class="left">选填,上拉加载更多的viewmodel,具体布局等特性继承RcVFooterVM扩充</td>
 </tr>
 
 
@@ -688,9 +707,10 @@ BindingCheckGroup同理
                        app:items="@{viewmodel.headerFooterItems}"
                        app:layoutManager="@{LayoutManagers.linear()}"/>
         ...
+
 # 参考<a id="sec-5" name="sec-5"></a>
 
-- [binding-collection-adapter](https://github.com/evant/binding-collection-adapter)
+1.  [binding-collection-adapter](https://github.com/evant/binding-collection-adapter)
 
 # License<a id="sec-6" name="sec-6"></a>
 
