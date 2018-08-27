@@ -11,8 +11,8 @@ import android.view.View;
 
 import com.lwy.dbindingview.ItemBinding;
 import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
-import com.lwy.dbindingview.adapter.wrapper.EmptyRecyclerViewAdapter;
 import com.lwy.dbindingview.app.R;
+import com.lwy.dbindingview.app.recycleview.LoggingRecyclerViewAdapter;
 import com.lwy.dbindingview.collections.MergeObservableList;
 import com.lwy.dbindingview.command.ReplyCommand;
 import com.lwy.dbindingview.command.functions.Action0;
@@ -69,9 +69,10 @@ public class RcvVM {
     public BindingRecyclerViewAdapter<Object> adapter;
 
     public RcvVM() {
-        EmptyRecyclerViewAdapter<Object> wrapper = new EmptyRecyclerViewAdapter<>();
-        wrapper.setEmptyView(R.layout.empty);
-        adapter = wrapper;
+//        EmptyRecyclerViewAdapter<Object> wrapper = new EmptyRecyclerViewAdapter<>();
+//        wrapper.setEmptyView(R.layout.empty);
+//        adapter = wrapper;
+        adapter = new LoggingRecyclerViewAdapter<>();
 //        for (int i = 0; i < 15; i++) {
 //            items.add(new ItemVM(i, checkable));
 //        }

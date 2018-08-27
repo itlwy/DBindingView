@@ -226,7 +226,13 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
 
     @Override
     public int getItemCount() {
-        return items == null ? 0 : items.size();
+        if (items == null)
+            return 0;
+        if (items.size() ==1 && items.get(0) instanceof RcVFooterVM){
+            return 0;
+        }
+        return items.size();
+//        return items == null ? 0 : items.size();
     }
 
     @Override
