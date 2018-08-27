@@ -52,6 +52,7 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
         return itemBinding;
     }
 
+
     @Override
     public void setItems(@Nullable List<T> items) {
         if (this.items == items) {
@@ -74,6 +75,11 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
     }
 
     @Override
+    public List<T> getItems() {
+        return this.items;
+    }
+
+    @Override
     public T getAdapterItem(int position) {
         return items.get(position);
     }
@@ -92,7 +98,7 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
                 RcVFooterVM footerVM = (RcVFooterVM) item;
                 if (footerVM.getOnLoadMoreCommand() != null && !footerVM.getIsFooterLoading().get()) {
                     footerVM.switchLoading(true);
-                    footerVM.getOnLoadMoreCommand().execute(recyclerView.getAdapter().getItemCount());
+                    footerVM.getOnLoadMoreCommand().execute(getItemCount());
                 }
             }
         }
@@ -117,7 +123,7 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
     }
 
     @Override
-    public final ViewHolder onCreateViewHolder(ViewGroup viewGroup, int layoutId) {
+    public  ViewHolder onCreateViewHolder(ViewGroup viewGroup, int layoutId) {
         if (inflater == null) {
             inflater = LayoutInflater.from(viewGroup.getContext());
         }
@@ -164,7 +170,7 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
     }
 
     @Override
-    public final void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public  void onBindViewHolder(ViewHolder viewHolder, int position) {
         T item = items.get(position);
         ViewDataBinding binding = DataBindingUtil.getBinding(viewHolder.itemView);
         onBindBinding(binding, itemBinding.variableId(), itemBinding.layoutRes(), position, item);

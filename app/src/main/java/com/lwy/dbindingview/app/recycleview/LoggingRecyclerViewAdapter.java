@@ -11,6 +11,7 @@ import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
 public class LoggingRecyclerViewAdapter<T> extends BindingRecyclerViewAdapter<T> {
     public static final String TAG = "RecyclerView";
 
+
     @Override
     public ViewDataBinding onCreateBinding(LayoutInflater inflater, @LayoutRes int layoutId, ViewGroup viewGroup) {
         ViewDataBinding binding = super.onCreateBinding(inflater, layoutId, viewGroup);

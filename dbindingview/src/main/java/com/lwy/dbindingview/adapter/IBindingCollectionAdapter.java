@@ -39,6 +39,7 @@ public interface IBindingCollectionAdapter<T> {
      */
     void setItems(@Nullable List<T> items);
 
+    List<T> getItems();
     /**
      * Returns the item in the adapter given position. This is useful for accessing items in the
      * adapter.

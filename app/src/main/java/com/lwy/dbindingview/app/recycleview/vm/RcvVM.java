@@ -11,13 +11,13 @@ import android.view.View;
 
 import com.lwy.dbindingview.ItemBinding;
 import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
-import com.lwy.dbindingview.app.BR;
+import com.lwy.dbindingview.adapter.wrapper.EmptyRecyclerViewAdapter;
 import com.lwy.dbindingview.app.R;
-import com.lwy.dbindingview.app.recycleview.LoggingRecyclerViewAdapter;
 import com.lwy.dbindingview.collections.MergeObservableList;
 import com.lwy.dbindingview.command.ReplyCommand;
 import com.lwy.dbindingview.command.functions.Action0;
 import com.lwy.dbindingview.itembindings.OnItemBindClass;
+
 
 public class RcvVM {
     private boolean checkable;  // for now,it's useless
@@ -55,55 +55,65 @@ public class RcvVM {
 
         @Override
         public void call() {
-            new AsyncTask<Void, Void, Integer>() {
-                @Override
-                protected Integer doInBackground(Void... voids) {
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Integer integer) {
-                    footerVM.switchLoading(false);
-                    if (items.size() > 20)
-                        return;
-                    for (int i = 0; i < 15; i++) {
-                        addItem();
-                    }
-                    super.onPostExecute(integer);
-                }
-            }.execute();
+            loadMore();
         }
+
     }));
 
     public final ObservableList<ItemVM> items = new ObservableArrayList<>();
 
-    /**
-     * Items merged with a header on top and footer on bottom.
-     */
-    public final MergeObservableList<Object> headerFooterItems = new MergeObservableList<>()
-            .insertItem("Header")
-            .insertList(items)
-            .insertItem(footerVM);
 
     /**
      * Custom adapter that logs calls.
      */
-    public final LoggingRecyclerViewAdapter<Object> adapter = new LoggingRecyclerViewAdapter<>();
+    public BindingRecyclerViewAdapter<Object> adapter;
 
     public RcvVM() {
-        for (int i = 0; i < 15; i++) {
-            items.add(new ItemVM(i, checkable));
-        }
+        EmptyRecyclerViewAdapter<Object> wrapper = new EmptyRecyclerViewAdapter<>();
+        wrapper.setEmptyView(R.layout.empty);
+        adapter = wrapper;
+//        for (int i = 0; i < 15; i++) {
+//            items.add(new ItemVM(i, checkable));
+//        }
+    }
+
+    private void loadMore() {
+        new AsyncTask<Void, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Void... voids) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Integer integer) {
+                footerVM.switchLoading(false);
+                if (items.size() > 20)
+                    return;
+                for (int i = 0; i < 15; i++) {
+                    addItem();
+                }
+                super.onPostExecute(integer);
+            }
+        }.execute();
     }
 
     public void setCheckable(boolean checkable) {
         this.checkable = checkable;
     }
+
+    /**
+     * Items merged with a header on top and footer on bottom.
+     */
+    public final MergeObservableList<Object> headerFooterItems = new MergeObservableList<>()
+//            .insertItem("Header")
+            .insertList(items)
+            .insertItem(footerVM);
+
 
     /**
      * Binds a homogeneous list of items to a layout.
@@ -127,9 +137,9 @@ public class RcvVM {
      * }</pre>
      */
     public final ItemBinding<Object> multipleItems = ItemBinding.of(new OnItemBindClass<>()
-            .map(FooterVM.class, BR.footerVM, R.layout.default_loading)
-            .map(String.class, BR.item, R.layout.item_header_footer)
-            .map(ItemVM.class, BR.item, R.layout.item));
+            .map(FooterVM.class, com.lwy.dbindingview.app.BR.footerVM, R.layout.default_loading)
+            .map(String.class, com.lwy.dbindingview.app.BR.item, R.layout.item_header_footer)
+            .map(ItemVM.class, com.lwy.dbindingview.app.BR.item, R.layout.item));
 
 
     /**

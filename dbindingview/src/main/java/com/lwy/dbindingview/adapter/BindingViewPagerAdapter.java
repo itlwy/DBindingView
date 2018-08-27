@@ -58,6 +58,11 @@ public class BindingViewPagerAdapter<T> extends PagerAdapter implements IBinding
     }
 
     @Override
+    public List<T> getItems() {
+        return items;
+    }
+
+    @Override
     public T getAdapterItem(int position) {
         return items.get(position);
     }

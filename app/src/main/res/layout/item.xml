@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="16dp"
+            android:hint="111111111"
             android:text='@{"Item " + (item.index + 1)}'
             tools:text="Item 1" />
 
