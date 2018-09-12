@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.lwy.dbindingview.adapter.BindingRecyclerViewAdapter;
 import com.lwy.dbindingview.adapter.ViewHolder;
-import com.lwy.dbindingview.data.RcVFooterVM;
 import com.lwy.dbindingview.utils.WrapperUtils;
 
 /**
@@ -27,8 +26,9 @@ public class EmptyRecyclerViewAdapter<T> extends BindingRecyclerViewAdapter<T> {
     }
 
     private boolean isEmpty() {
-        return ((mEmptyView != null || mEmptyLayoutId != 0) && (getItems().size() == 0
-                || (getItems().size() == 1 && getItems().get(0) instanceof RcVFooterVM)));
+        return ((mEmptyView != null || mEmptyLayoutId != 0) && super.getItemCount() == 0);
+//        return ((mEmptyView != null || mEmptyLayoutId != 0) && (getItems().size() == 0
+//                || (getItems().size() == 1 && getItems().get(0) instanceof RcVFooterVM)));
     }
 
     @Override

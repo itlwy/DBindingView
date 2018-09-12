@@ -96,7 +96,9 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
             Class<RcVFooterVM> key = RcVFooterVM.class;
             if (key.isInstance(item)) {
                 RcVFooterVM footerVM = (RcVFooterVM) item;
-                if (footerVM.getOnLoadMoreCommand() != null && !footerVM.getIsFooterLoading().get()) {
+                if (recyclerView.computeVerticalScrollOffset() > 0 &&
+                        footerVM.getOnLoadMoreCommand() != null &&
+                        !footerVM.getIsFooterLoading().get()) {
                     footerVM.switchLoading(true);
                     footerVM.getOnLoadMoreCommand().execute(getItemCount());
                 }
@@ -123,7 +125,7 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
     }
 
     @Override
-    public  ViewHolder onCreateViewHolder(ViewGroup viewGroup, int layoutId) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int layoutId) {
         if (inflater == null) {
             inflater = LayoutInflater.from(viewGroup.getContext());
         }
@@ -170,7 +172,7 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
     }
 
     @Override
-    public  void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
         T item = items.get(position);
         ViewDataBinding binding = DataBindingUtil.getBinding(viewHolder.itemView);
         onBindBinding(binding, itemBinding.variableId(), itemBinding.layoutRes(), position, item);
@@ -228,7 +230,7 @@ public class BindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<ViewHold
     public int getItemCount() {
         if (items == null)
             return 0;
-        if (items.size() ==1 && items.get(0) instanceof RcVFooterVM){
+        if (items.size() == 1 && items.get(0) instanceof RcVFooterVM) {
             return 0;
         }
         return items.size();

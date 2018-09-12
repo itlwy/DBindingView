@@ -41,7 +41,7 @@ public class RcvVM {
                 public void run() {
                     if (items.size() > 0)
                         items.clear();
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < 15; i++) {
                         items.add(new ItemVM(i, checkable));
                     }
                     viewStyle.isRefreshing.set(false);
@@ -66,16 +66,11 @@ public class RcvVM {
     /**
      * Custom adapter that logs calls.
      */
-    public BindingRecyclerViewAdapter<Object> adapter;
+    public LoggingRecyclerViewAdapter<Object> adapter = new LoggingRecyclerViewAdapter<>();
 
     public RcvVM() {
-//        EmptyRecyclerViewAdapter<Object> wrapper = new EmptyRecyclerViewAdapter<>();
-//        wrapper.setEmptyView(R.layout.empty);
-//        adapter = wrapper;
-        adapter = new LoggingRecyclerViewAdapter<>();
-//        for (int i = 0; i < 15; i++) {
-//            items.add(new ItemVM(i, checkable));
-//        }
+        viewStyle.isRefreshing.set(true);
+        onRefreshCommand.execute();
     }
 
     private void loadMore() {

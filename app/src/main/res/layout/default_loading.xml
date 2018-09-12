@@ -50,6 +50,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:text="@{footerVM.noMoreTip}"
+                app:clickCommand="@{footerVM.clickCommand}"
                 android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
