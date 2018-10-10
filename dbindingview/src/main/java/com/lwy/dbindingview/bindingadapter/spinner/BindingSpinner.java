@@ -91,7 +91,7 @@ public class BindingSpinner extends AppCompatSpinner {
             BindingArrayAdapter bindingArrayAdapter = (BindingArrayAdapter) spinner.getAdapter();
             for (int i = 0; i < bindingArrayAdapter.getObjects().size(); i++) {
                 KeyValue item = bindingArrayAdapter.getObjects().get(i);
-                if (item.key.equals(selectedValue.key) ) {
+                if (item.key.equals(selectedValue.key)) {
                     spinner.setSelection(i);
                     spinner.selectedValue = selectedValue;
                     flag = true;
@@ -123,7 +123,7 @@ public class BindingSpinner extends AppCompatSpinner {
             arrayAdapter.clear();
             arrayAdapter.addAll(items);
         }
-        if (!setSelection(spinner, selectedValue)) {
+        if (!setSelection(spinner, selectedValue) && arrayAdapter.getObjects().size() > 0) {
             selectedValue = arrayAdapter.getObjects().get(0);
             spinner.selectedValue = selectedValue;
             if (spinner.listener != null) {
